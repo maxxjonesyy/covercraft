@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "WFVisualSans";
+  src: url("./assets/fonts/WFVisualSans-RegularText.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "WFVisualSans";
+  src: url("./assets/fonts/WFVisualSans-MediumText.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "WFVisualSans";
+  src: url("./assets/fonts/WFVisualSans-SemiboldText.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "WFVisualSans";
+  src: url("./assets/fonts/WFVisualSans-BoldText.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@layer base {
+  body {
+    @apply font-wf;
+  }
+}
+
+@layer components {
+}
+
+@layer utilities {
+}
