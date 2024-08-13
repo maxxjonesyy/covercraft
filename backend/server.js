@@ -26,4 +26,6 @@ const corsOptions = {
 app.use(express.json({ limit: "1mb" }));
 app.use(cors(corsOptions));
 
+app.use("/", require("./routes/OpenAI"));
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
