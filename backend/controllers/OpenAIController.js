@@ -2,9 +2,9 @@ const OpenAI = require("openai");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 const createCoverLetter = async (req, res) => {
-  const { title, description, resume } = req.body;
+  const { title, company, description, resume } = req.body;
 
-  if (!title || !description || !resume) {
+  if (!title || !company || !description || !resume) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
@@ -24,7 +24,7 @@ const createCoverLetter = async (req, res) => {
         },
         {
           role: "system",
-          content: `Job Title: ${title}, Job Description: ${description}`,
+          content: `Job Title: ${title}, Job Company: ${company}, Job Description: ${description}`,
         },
         {
           role: "user",
