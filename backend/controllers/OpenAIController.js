@@ -35,7 +35,7 @@ const createCoverLetter = async (req, res) => {
     });
 
     if (completion.choices[0]) {
-      res.status(200).json({ data: completion.choices[0].message.content });
+      res.status(200).json(completion.choices[0].message.content);
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
