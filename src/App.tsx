@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Home from "./views/Home";
 import CoverletterCreate from "./views/CoverLetterCreate";
 import CoverLetterReady from "./views/CoverLetterReady";
 
@@ -9,6 +10,7 @@ function App() {
       <Navbar />
 
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/coverletter" element={<CoverletterCreate />} />
         <Route path="/coverletter/result" element={<CoverLetterReady />} />
       </Routes>
