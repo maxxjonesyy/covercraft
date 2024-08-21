@@ -12,6 +12,12 @@ export default {
           bold: 700,
         },
       },
+
+      colors: {
+        primary: "#292929",
+        secondary: "#d1d5db",
+        accentBlue: "#3943B7",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],

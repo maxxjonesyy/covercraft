@@ -32,7 +32,7 @@
 
 @layer base {
   body {
-    @apply font-wf text-gray-800;
+    @apply font-wf text-primary;
   }
 
   h1,
@@ -53,13 +53,13 @@
   }
 
   textarea {
-    @apply w-full max-w-3xl p-1.5 bg-white/50 border border-gray-300 rounded scrollbar-hide resize-none;
+    @apply w-full max-w-3xl p-1.5 bg-white/50 border border-gray-300 rounded scrollbar-hide overflow-hidden resize-none;
   }
 }
 
 @layer components {
   .container {
-    @apply max-w-[75rem] mx-auto py-10;
+    @apply max-w-3xl mx-auto py-10;
   }
 }
 
