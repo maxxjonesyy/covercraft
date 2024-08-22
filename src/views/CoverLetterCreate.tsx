@@ -9,6 +9,8 @@ import extractFileText from "../utils/extractFileText";
 import Loader from "../components/Loader";
 import useCoverLetterForm from "../hooks/useCoverLetterForm";
 
+import createSVG from "../assets/icons/create.svg";
+
 function CoverletterCreate() {
   const navigate = useNavigate();
   const [coverLetter, setCoverLetter] = useState("");
@@ -103,8 +105,12 @@ function CoverletterCreate() {
         <button
           type="submit"
           disabled={fetchCoverLetter.isPending}
-          className="flex items-center gap-3 mt-5 bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
-          {fetchCoverLetter.isPending && <Loader />}
+          className="flex items-center justify-center gap-2 mt-3 bg-accentBlue text-white text-sm px-4 py-2 rounded shadow transition-all hover:scale-105">
+          {!fetchCoverLetter.isPending ? (
+            <img src={createSVG} alt="create cover letter" />
+          ) : (
+            <Loader />
+          )}
           Create cover letter
         </button>
       </form>
