@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ResizableTextArea from "../components/ResizableTextArea";
+import Button from "../components/Button";
 import toast from "react-hot-toast";
 
 import backArrowSVG from "../assets/icons/back-arrow.svg";
 import clickToCopySVG from "../assets/icons/click-to-copy.svg";
+import saveSVG from "../assets/icons/save.svg";
 
 function CoverLetterReady() {
   const clickToCopyRef = useRef<HTMLDivElement>(null);
@@ -27,20 +29,26 @@ function CoverLetterReady() {
 
   return (
     <div className="container">
-      <h1 className="text-3xl mb-2">Your cover letter is ready!</h1>
-      <p>
-        Click to copy your cover letter for {""}
-        <b>
-          {formData?.title} at {formData?.company}
-        </b>
+      <h1 className="text-3xl">
+        {formData.title} at {formData.company}
+      </h1>
+      <p className="mt-3">
+        Click to copy or save to your collection - it's that simple!
       </p>
 
-      <button
-        className="flex items-center justify-center gap-3 text-sm mt-10 bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105"
-        onClick={() => navigate("/coverletter")}>
-        <img src={backArrowSVG} alt="back to form" />
-        Back to form
-      </button>
+      <div className="flex items-center justify-between max-w-3xl  mt-10">
+        <Button
+          text="Back to form"
+          image={{ url: backArrowSVG, alt: "back to form" }}
+          onClick={() => navigate("/coverletter")}
+          isBlue
+        />
+
+        <Button
+          text="Save"
+          image={{ url: saveSVG, alt: "save cover letter" }}
+        />
+      </div>
 
       <div
         className="relative mt-5 overflow-hidden"
@@ -48,17 +56,18 @@ function CoverLetterReady() {
         onMouseLeave={animateClickToCopy}
         onClick={() => {
           navigator.clipboard.writeText(coverLetter);
-          toast.success("Cover letter copied to clipboard");
+          toast.success("Successfully copied!");
         }}>
         <div className="absolute h-[99%] z-10 w-full transition-all hover:cursor-pointer hover:bg-accentBlue/5" />
 
         <div
           ref={clickToCopyRef}
           className="absolute transition-all duration-300 top-0 right-[-50%] p-5">
-          <button className="flex items-center gap-3 px-5 py-2 text-white bg-accentBlue rounded">
-            <span className="text-sm">Click to copy</span>
-            <img src={clickToCopySVG} alt="click to copy cover letter" />
-          </button>
+          <Button
+            text="Click to copy"
+            image={{ url: clickToCopySVG, alt: "click to copy cover letter" }}
+            isBlue
+          />
         </div>
 
         <ResizableTextArea
