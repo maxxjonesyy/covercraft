@@ -8,7 +8,7 @@ import CoverLetterReady from "./views/CoverLetterReady";
 
 function App() {
   return (
-    <div className="min-h-screen px-5 bg-gradient-to-b from-stone-100 to-zinc-100">
+    <div className="min-h-screen px-5 bg-gradient-to-b from-white via-white to-indigo-100/80">
       <Navbar />
 
       <Routes>
