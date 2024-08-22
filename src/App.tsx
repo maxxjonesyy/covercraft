@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import Home from "./views/Home";
+import Login from "./views/Login";
+import Register from "./views/Register";
 import CoverletterCreate from "./views/CoverLetterCreate";
 import CoverLetterReady from "./views/CoverLetterReady";
 
@@ -11,6 +13,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/coverletter" element={<CoverletterCreate />} />
         <Route path="/coverletter/result" element={<CoverLetterReady />} />
       </Routes>
