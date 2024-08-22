@@ -41,7 +41,7 @@
   h4,
   h5,
   h6 {
-    @apply font-mono font-bold transition-all duration-300;
+    @apply font-bold transition-all duration-300;
   }
 
   label {
@@ -59,7 +59,7 @@
 
 @layer components {
   .container {
-    @apply max-w-3xl mx-auto py-10;
+    @apply max-w-3xl mx-auto py-[6rem];
   }
 }
 
