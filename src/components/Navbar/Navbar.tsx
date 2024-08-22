@@ -5,7 +5,7 @@ import loginSVG from "../../assets/icons/login.svg";
 
 function Navbar() {
   return (
-    <nav className="max-w-[75rem] mx-auto flex items-center justify-between mx-auto p-5 bg-white/20 rounded-md shadow-sm">
+    <nav className="max-w-[75rem] mx-auto flex items-center justify-between mx-auto p-5">
       <Link to="/">
         <h1 className="text-xl md:text-2xl">Covercraft</h1>
       </Link>
