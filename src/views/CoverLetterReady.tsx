@@ -1,9 +1,10 @@
 import { useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ResizableTextArea from "../components/ResizableTextArea";
-import backArrow from "../assets/icons/back-arrow.svg";
-import clickToCopy from "../assets/icons/click-to-copy.svg";
 import toast from "react-hot-toast";
+
+import backArrowSVG from "../assets/icons/back-arrow.svg";
+import clickToCopySVG from "../assets/icons/click-to-copy.svg";
 
 function CoverLetterReady() {
   const clickToCopyRef = useRef<HTMLDivElement>(null);
@@ -37,7 +38,7 @@ function CoverLetterReady() {
       <button
         className="flex items-center justify-center gap-3 text-sm mt-10 bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105"
         onClick={() => navigate("/coverletter")}>
-        <img src={backArrow} alt="back to form" />
+        <img src={backArrowSVG} alt="back to form" />
         Back to form
       </button>
 
@@ -56,7 +57,7 @@ function CoverLetterReady() {
           className="absolute transition-all duration-300 top-0 right-[-50%] p-5">
           <button className="flex items-center gap-3 px-5 py-2 text-white bg-accentBlue rounded">
             <span className="text-sm">Click to copy</span>
-            <img src={clickToCopy} alt="click to copy cover letter" />
+            <img src={clickToCopySVG} alt="click to copy cover letter" />
           </button>
         </div>
 
