@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const connectMongoDB = require("./database/mongo");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -28,4 +29,12 @@ app.use(cors(corsOptions));
 
 app.use("/", require("./routes/OpenAI"));
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+connectMongoDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log("Failed to connect to MongoDB:", error);
+  });
