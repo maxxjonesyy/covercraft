@@ -3,6 +3,7 @@ const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 async function createCoverLetter(req, res) {
   const { title, company, description, resume } = req.body;
+  const maxWords = 300;
 
   if (!title || !company || !description || !resume) {
     return res.status(400).json({ error: "All fields are required" });
@@ -18,7 +19,7 @@ async function createCoverLetter(req, res) {
               Begin with a succinct introduction about the candidate's identity and career goals. Highlight 
               skills aligned with the job, underpinned by tangible examples. Incorporate details about the company, 
               emphasizing its mission or unique aspects that align with the candidate's values. Conclude by 
-              reaffirming the candidate's suitability, inviting further discussion. Please provide your response in under 250 words based on the information provided.
+              reaffirming the candidate's suitability, inviting further discussion. Please provide your response in under ${maxWords} words based on the information provided.
               
               Job Title: ${title}
               Job Company: ${company}
