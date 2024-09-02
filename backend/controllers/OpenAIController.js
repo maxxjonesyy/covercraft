@@ -1,7 +1,7 @@
 const OpenAI = require("openai");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
-const createCoverLetter = async (req, res) => {
+async function createCoverLetter(req, res) {
   const { title, company, description, resume } = req.body;
 
   if (!title || !company || !description || !resume) {
@@ -38,6 +38,6 @@ const createCoverLetter = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-};
+}
 
 module.exports = { createCoverLetter };
