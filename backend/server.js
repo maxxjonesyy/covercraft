@@ -29,7 +29,7 @@ app.use(express.json({ limit: "1mb" }));
 app.use(cors(corsOptions));
 app.use(escapeInputs);
 
-app.use("/", require("./routes/OpenAI"));
+app.use("/", require("./routes/openai-route"));
 
 connectMongoDB()
   .then(() => {
