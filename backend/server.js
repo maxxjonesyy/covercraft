@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectMongoDB = require("./database/mongo");
+const { escapeInputs } = require("./middleware/middleware");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -26,6 +27,7 @@ const corsOptions = {
 
 app.use(express.json({ limit: "1mb" }));
 app.use(cors(corsOptions));
+app.use(escapeInputs);
 
 app.use("/", require("./routes/OpenAI"));
 
