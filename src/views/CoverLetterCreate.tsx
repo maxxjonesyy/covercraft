@@ -11,6 +11,13 @@ import useCoverLetterForm from "../hooks/useCoverLetterForm";
 import ReactQueryError from "../types/types";
 import createSVG from "../assets/icons/create.svg";
 
+interface CoverLetterFormData {
+  title: string;
+  company: string;
+  description: string;
+  resume: string;
+}
+
 function CoverletterCreate() {
   const navigate = useNavigate();
   const [coverLetter, setCoverLetter] = useState("");
@@ -18,7 +25,8 @@ function CoverletterCreate() {
     useCoverLetterForm();
 
   const fetchCoverLetter = useMutation({
-    mutationFn: (formData: any) => axios.post("/coverletter", formData),
+    mutationFn: (formData: CoverLetterFormData) =>
+      axios.post("/coverletter", formData),
     onMutate: () => {
       toast.loading("Generating cover letter...");
     },

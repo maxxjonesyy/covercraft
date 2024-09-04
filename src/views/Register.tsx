@@ -9,12 +9,20 @@ import toast from "react-hot-toast";
 import ReactQueryError from "../types/types";
 import { useNavigate } from "react-router-dom";
 
+interface RegisterFormData {
+  name: string;
+  email: string;
+  password: string;
+  passwordMatch: string;
+}
+
 function Register() {
   const { formData, handleChange, validateForm } = useRegisterForm();
   const navigate = useNavigate();
 
   const register = useMutation({
-    mutationFn: (formData: any) => axios.post("/register", formData),
+    mutationFn: (formData: RegisterFormData) =>
+      axios.post("/register", formData),
     onMutate: () => {
       toast.loading("Creating account...");
     },
