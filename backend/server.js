@@ -30,6 +30,7 @@ app.use(cors(corsOptions));
 app.use(escapeInputs);
 
 app.use("/", require("./routes/openai-route"));
+app.use("/", require("./routes/user-routes"));
 
 connectMongoDB()
   .then(() => {
