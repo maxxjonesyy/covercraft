@@ -4,12 +4,11 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
 import ResizableTextArea from "../components/ResizableTextArea";
 import extractFileText from "../utils/extractFileText";
 import Loader from "../components/Loader";
 import useCoverLetterForm from "../hooks/useCoverLetterForm";
-
+import ReactQueryError from "../types/types";
 import createSVG from "../assets/icons/create.svg";
 
 function CoverletterCreate() {
@@ -23,16 +22,21 @@ function CoverletterCreate() {
     onMutate: () => {
       toast.loading("Generating cover letter...");
     },
-    onSuccess: ({ data }) => {
+    onSuccess: (response) => {
+      const { data } = response.data;
+
       if (data) {
         toast.dismiss();
         toast.success("Cover letter generated successfully!");
         setCoverLetter(data);
       }
     },
-    onError: () => {
+    onError: (error: ReactQueryError) => {
+      const errorMessage =
+        error?.response?.data?.error || "An unexpected error occurred.";
+
       toast.dismiss();
-      toast.error("An unexpected error occurred. Please try again later.");
+      toast.error(errorMessage);
     },
   });
 
