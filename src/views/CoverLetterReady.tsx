@@ -29,55 +29,56 @@ function CoverLetterReady() {
   }, []);
 
   return (
-    <motion.div animate={{ y: 0, opacity: 1 }} initial={{ y: 300, opacity: 0 }}>
-      <div className="container">
-        <h1 className="text-3xl">
-          {formData.title} at {formData.company}
-        </h1>
-        <p className="mt-3">
-          Click to copy or save to your collection - it's that simple!
-        </p>
+    <motion.div
+      animate={{ y: 0, opacity: 1 }}
+      initial={{ y: 300, opacity: 0 }}
+      className="container">
+      <h1 className="text-3xl">
+        {formData.title} at {formData.company}
+      </h1>
+      <p className="mt-3">
+        Click to copy or save to your collection - it's that simple!
+      </p>
 
-        <div className="flex items-center justify-between max-w-3xl  mt-10">
-          <Button
-            text="Back to form"
-            image={{ url: backArrowSVG, alt: "back to form" }}
-            onClick={() => navigate("/coverletter")}
-            isBlue
-          />
+      <div className="flex items-center justify-between max-w-3xl  mt-10">
+        <Button
+          text="Back to form"
+          image={{ url: backArrowSVG, alt: "back to form" }}
+          onClick={() => navigate("/coverletter")}
+          isBlue
+        />
 
-          <Button
-            text="Save"
-            image={{ url: saveSVG, alt: "save cover letter" }}
-          />
-        </div>
+        <Button
+          text="Save"
+          image={{ url: saveSVG, alt: "save cover letter" }}
+        />
+      </div>
+
+      <div
+        className="relative mt-5 overflow-hidden"
+        onMouseEnter={animateClickToCopy}
+        onMouseLeave={animateClickToCopy}
+        onClick={() => {
+          navigator.clipboard.writeText(coverLetter);
+          toast.success("Successfully copied!");
+        }}>
+        <div className="absolute h-[99%] z-10 w-full transition-all hover:cursor-pointer hover:bg-accentBlue/5" />
 
         <div
-          className="relative mt-5 overflow-hidden"
-          onMouseEnter={animateClickToCopy}
-          onMouseLeave={animateClickToCopy}
-          onClick={() => {
-            navigator.clipboard.writeText(coverLetter);
-            toast.success("Successfully copied!");
-          }}>
-          <div className="absolute h-[99%] z-10 w-full transition-all hover:cursor-pointer hover:bg-accentBlue/5" />
-
-          <div
-            ref={clickToCopyRef}
-            className="absolute transition-all duration-300 top-0 right-[-50%] p-5">
-            <Button
-              text="Click to copy"
-              image={{ url: clickToCopySVG, alt: "click to copy cover letter" }}
-              isBlue
-            />
-          </div>
-
-          <ResizableTextArea
-            readOnly
-            value={coverLetter}
-            className="text-sm hover:cursor-pointer"
+          ref={clickToCopyRef}
+          className="absolute transition-all duration-300 top-0 right-[-50%] p-5">
+          <Button
+            text="Click to copy"
+            image={{ url: clickToCopySVG, alt: "click to copy cover letter" }}
+            isBlue
           />
         </div>
+
+        <ResizableTextArea
+          readOnly
+          value={coverLetter}
+          className="text-sm hover:cursor-pointer"
+        />
       </div>
     </motion.div>
   );
