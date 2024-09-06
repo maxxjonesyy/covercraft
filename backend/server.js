@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const connectMongoDB = require("./database/mongo");
 const { escapeInputs } = require("./middleware/middleware");
 
@@ -22,14 +23,17 @@ const corsOptions = {
       callback(new Error("Not allowed by CORS"));
     }
   },
+  credentials: true,
   optionsSuccessStatus: 200,
 };
 
+app.use(cookieParser());
 app.use(express.json({ limit: "1mb" }));
 app.use(cors(corsOptions));
 app.use(escapeInputs);
 
-app.use("/", require("./routes/openai-route"));
+app.use("/", require("./routes/openai-routes"));
+app.use("/", require("./routes/token-routes"));
 app.use("/", require("./routes/user-routes"));
 
 connectMongoDB()
