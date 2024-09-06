@@ -6,6 +6,7 @@ import axios from "axios";
 import { Toaster } from "react-hot-toast";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
+import { UserProvider } from "./context/UserContext.tsx";
 
 const queryClient = new QueryClient();
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_BASE_URL;
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <Toaster />
       <BrowserRouter>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>
