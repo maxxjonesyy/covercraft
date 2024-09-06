@@ -8,7 +8,7 @@ import ResizableTextArea from "../components/ResizableTextArea";
 import extractFileText from "../utils/extractFileText";
 import Loader from "../components/Loader";
 import useCoverLetterForm from "../hooks/useCoverLetterForm";
-import ReactQueryError from "../types/types";
+import { ReactQueryError } from "../types/types";
 import createSVG from "../assets/icons/create.svg";
 
 interface CoverLetterFormData {

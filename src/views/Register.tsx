@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import useRegisterForm from "../hooks/useRegisterForm";
 import axios from "axios";
 import toast from "react-hot-toast";
-import ReactQueryError from "../types/types";
+import { ReactQueryError } from "../types/types";
 import { useNavigate } from "react-router-dom";
 
 interface RegisterFormData {

@@ -1,4 +1,4 @@
-export default interface ReactQueryError {
+export interface ReactQueryError {
   response: {
     data: {
       error: string;
