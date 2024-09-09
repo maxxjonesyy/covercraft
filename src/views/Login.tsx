@@ -3,12 +3,12 @@ import { UserContext } from "../context/UserContext";
 import { FormEvent } from "react";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
+import { ReactQueryError } from "../types/types";
+import { Link } from "react-router-dom";
+import { Loader } from "../components/index";
 import toast from "react-hot-toast";
 import axios from "axios";
 import useLoginForm from "../hooks/useLoginForm";
-import { ReactQueryError } from "../types/types";
-import Loader from "../components/Loader";
-import { Link } from "react-router-dom";
 
 interface LoginFormData {
   email: string;
@@ -17,7 +17,7 @@ interface LoginFormData {
 
 function Login() {
   const { formData, handleChange, validateForm } = useLoginForm();
-  const { login } = useContext(UserContext);
+  const { user, login } = useContext(UserContext);
 
   const handleLogin = useMutation({
     mutationFn: (formData: LoginFormData) => axios.post("/login", formData, {}),

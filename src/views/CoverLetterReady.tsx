@@ -1,10 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ResizableTextArea from "../components/ResizableTextArea";
-import Button from "../components/Button";
-import toast from "react-hot-toast";
 import { motion } from "framer-motion";
-
+import { ResizableTextArea, Button } from "../components/index";
+import toast from "react-hot-toast";
 import backArrowSVG from "../assets/icons/back-arrow.svg";
 import clickToCopySVG from "../assets/icons/click-to-copy.svg";
 import saveSVG from "../assets/icons/save.svg";

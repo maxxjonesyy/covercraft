@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import ButtonLink from "./ButtonLink";
-
+import { ButtonLink } from "../index";
 import loginSVG from "../../assets/icons/login.svg";
 
 function Navbar() {

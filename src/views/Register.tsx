@@ -1,13 +1,13 @@
 import { FormEvent } from "react";
-import Loader from "../components/Loader";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
+import { ReactQueryError } from "../types/types";
+import { useNavigate } from "react-router-dom";
+import { Loader } from "../components/index";
 import useRegisterForm from "../hooks/useRegisterForm";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { ReactQueryError } from "../types/types";
-import { useNavigate } from "react-router-dom";
 
 interface RegisterFormData {
   name: string;
