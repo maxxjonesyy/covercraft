@@ -3,12 +3,11 @@ import { UserContext } from "../context/UserContext";
 import { FormEvent } from "react";
 import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
-import { ReactQueryError } from "../types/types";
 import { Link } from "react-router-dom";
 import { Loader } from "../components/index";
 import toast from "react-hot-toast";
-import axios from "axios";
 import useLoginForm from "../hooks/useLoginForm";
+import useAxiosInstance from "../hooks/useAxiosInstance";
 
 interface LoginFormData {
   email: string;
@@ -17,10 +16,12 @@ interface LoginFormData {
 
 function Login() {
   const { formData, handleChange, validateForm } = useLoginForm();
-  const { user, login } = useContext(UserContext);
+  const axiosInstance = useAxiosInstance();
+  const { login } = useContext(UserContext);
 
   const handleLogin = useMutation({
-    mutationFn: (formData: LoginFormData) => axios.post("/login", formData, {}),
+    mutationFn: async (formData: LoginFormData) =>
+      await axiosInstance.post("/login", formData),
     onMutate: () => {
       toast.loading("Logging in...");
     },
@@ -28,17 +29,10 @@ function Login() {
       const { data } = response.data;
 
       if (data) {
-        login(data);
         toast.dismiss();
+        login(data);
         toast.success("Logged in successfully!");
       }
-    },
-    onError: (error: ReactQueryError) => {
-      const errorMessage =
-        error?.response?.data?.error || "An unexpected error occurred.";
-
-      toast.dismiss();
-      toast.error(errorMessage);
     },
   });
 

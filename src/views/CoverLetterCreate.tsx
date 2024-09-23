@@ -1,17 +1,15 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import ResizableTextArea from "../components/ResizableTextArea";
+import { ResizableTextArea, Loader } from "../components/index";
+import toast from "react-hot-toast";
 import extractFileText from "../utils/extractFileText";
-import Loader from "../components/Loader";
 import useCoverLetterForm from "../hooks/useCoverLetterForm";
-import { ReactQueryError } from "../types/types";
 import createSVG from "../assets/icons/create.svg";
+import useAxiosInstance from "../hooks/useAxiosInstance";
 
-interface CoverLetterFormData {
+interface CoverletterFormData {
   title: string;
   company: string;
   description: string;
@@ -21,12 +19,13 @@ interface CoverLetterFormData {
 function CoverletterCreate() {
   const navigate = useNavigate();
   const [coverLetter, setCoverLetter] = useState("");
+  const axiosInstance = useAxiosInstance();
   const { formData, setFormData, handleChange, validateForm } =
     useCoverLetterForm();
 
-  const fetchCoverLetter = useMutation({
-    mutationFn: (formData: CoverLetterFormData) =>
-      axios.post("/coverletter", formData),
+  const handleCoverletter = useMutation({
+    mutationFn: async (formData: CoverletterFormData) =>
+      await axiosInstance.post("/coverletter", formData),
     onMutate: () => {
       toast.loading("Generating cover letter...");
     },
@@ -35,16 +34,9 @@ function CoverletterCreate() {
 
       if (data) {
         toast.dismiss();
-        toast.success("Cover letter generated successfully!");
         setCoverLetter(data);
+        toast.success("Cover letter generated successfully!");
       }
-    },
-    onError: (error: ReactQueryError) => {
-      const errorMessage =
-        error?.response?.data?.error || "An unexpected error occurred.";
-
-      toast.dismiss();
-      toast.error(errorMessage);
     },
   });
 
@@ -68,10 +60,12 @@ function CoverletterCreate() {
       <p>Upload your resume and job details to get started</p>
 
       <form
-        className={`w-full mt-10 ${fetchCoverLetter.isPending && "opacity-60"}`}
+        className={`w-full mt-10 ${
+          handleCoverletter.isPending && "opacity-60"
+        }`}
         onSubmit={(e: FormEvent) => {
           e.preventDefault();
-          if (validateForm()) fetchCoverLetter.mutate(formData);
+          if (validateForm()) handleCoverletter.mutate(formData);
         }}>
         <label htmlFor="resume">Upload resume:</label>
         <input
@@ -120,9 +114,9 @@ function CoverletterCreate() {
 
         <button
           type="submit"
-          disabled={fetchCoverLetter.isPending}
+          disabled={handleCoverletter.isPending}
           className="flex items-center justify-center gap-2 mt-3 bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
-          {!fetchCoverLetter.isPending ? (
+          {!handleCoverletter.isPending ? (
             <img src={createSVG} alt="create cover letter" />
           ) : (
             <Loader />

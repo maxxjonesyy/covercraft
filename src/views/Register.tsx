@@ -6,7 +6,7 @@ import { ReactQueryError } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../components/index";
 import useRegisterForm from "../hooks/useRegisterForm";
-import axios from "axios";
+import useAxiosInstance from "../hooks/useAxiosInstance";
 import toast from "react-hot-toast";
 
 interface RegisterFormData {
@@ -18,11 +18,12 @@ interface RegisterFormData {
 
 function Register() {
   const { formData, handleChange, validateForm } = useRegisterForm();
+  const axiosInstance = useAxiosInstance();
   const navigate = useNavigate();
 
   const register = useMutation({
-    mutationFn: (formData: RegisterFormData) =>
-      axios.post("/register", formData),
+    mutationFn: async (formData: RegisterFormData) =>
+      await axiosInstance.post("/register", formData),
     onMutate: () => {
       toast.loading("Creating account...");
     },
@@ -36,15 +37,9 @@ function Register() {
       }
     },
     onError: (error: ReactQueryError) => {
-      const errorMessage =
-        error?.response?.data?.error || "An unexpected error occurred.";
-
-      if (errorMessage === "Password is not strong enough") {
+      if (error?.response?.data?.error === "Password is not strong enough") {
         document.getElementById("password-hint")?.classList.remove("hidden");
       }
-
-      toast.dismiss();
-      toast.error(errorMessage);
     },
   });
 
