@@ -14,7 +14,7 @@ async function createCoverLetter(req, res) {
       messages: [
         {
           role: "system",
-          content: `You are a cover letter generator. Your task is to create human-like and concise cover letters. 
+          content: `You are a cover letter writer. Your task is to create human-like and concise cover letters. 
               To compose a compelling cover letter, scrutinize the job description for key qualifications that are related to the resume. 
               Begin with a succinct introduction about the candidate's identity and career goals. Highlight 
               skills aligned with the job, underpinned by tangible examples. Incorporate details about the company, 

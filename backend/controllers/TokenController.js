@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 function refreshToken(req, res) {
   const refreshToken = req.cookies.refreshToken;
 
