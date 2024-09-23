@@ -1,10 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import Home from "./views/Home";
-import Login from "./views/Login";
-import Register from "./views/Register";
-import CoverletterCreate from "./views/CoverLetterCreate";
-import CoverLetterReady from "./views/CoverLetterReady";
+import {
+  Home,
+  Login,
+  Register,
+  CoverLetterCreate,
+  CoverLetterReady,
+} from "./views/index";
 
 function App() {
   return (
@@ -15,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/coverletter" element={<CoverletterCreate />} />
+        <Route path="/coverletter" element={<CoverLetterCreate />} />
         <Route path="/coverletter/result" element={<CoverLetterReady />} />
       </Routes>
     </div>
