@@ -34,6 +34,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   function login(userData: User) {
     setUser(userData);
+    navigate("/");
   }
 
   async function refreshToken() {
