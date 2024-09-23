@@ -18,8 +18,9 @@ interface CoverletterFormData {
 
 function CoverletterCreate() {
   const navigate = useNavigate();
-  const [coverLetter, setCoverLetter] = useState("");
   const axiosInstance = useAxiosInstance();
+
+  const [coverLetter, setCoverLetter] = useState("");
   const { formData, setFormData, handleChange, validateForm } =
     useCoverLetterForm();
 
@@ -42,12 +43,8 @@ function CoverletterCreate() {
 
   useEffect(() => {
     if (coverLetter) {
-      navigate("/coverletter/result", {
-        state: {
-          formData,
-          coverLetter,
-        },
-      });
+      let coverLetterCopy = coverLetter;
+      navigate("/coverletter/result", { state: { coverLetterCopy, formData } });
     }
   }, [coverLetter]);
 

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef, ChangeEvent } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ResizableTextArea, Button } from "../components/index";
@@ -8,14 +8,18 @@ import clickToCopySVG from "../assets/icons/click-to-copy.svg";
 import saveSVG from "../assets/icons/save.svg";
 
 function CoverLetterReady() {
-  const clickToCopyRef = useRef<HTMLDivElement>(null);
-  const coverLetter = useLocation().state?.coverLetter;
-  const formData = useLocation().state?.formData;
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const clickToCopyRef = useRef<HTMLDivElement>(null);
+  let { formData, coverLetterCopy } = location.state;
+
+  const [editMode, setEditMode] = useState(false);
+  const [coverLetter, setCoverLetter] = useState(coverLetterCopy);
 
   function animateClickToCopy() {
     if (clickToCopyRef.current) {
-      clickToCopyRef.current.classList.toggle("right-[-50%]");
+      clickToCopyRef.current.classList.toggle("right-[-100%]");
       clickToCopyRef.current.classList.toggle("right-[0%]");
     }
   }
@@ -46,10 +50,17 @@ function CoverLetterReady() {
           isBlue
         />
 
-        <Button
-          text="Save"
-          image={{ url: saveSVG, alt: "save cover letter" }}
-        />
+        <div className="flex gap-2">
+          <Button
+            text="Save"
+            image={{ url: saveSVG, alt: "save cover letter" }}
+          />
+
+          <Button
+            text={editMode ? "Done" : "Edit"}
+            onClick={() => setEditMode(!editMode)}
+          />
+        </div>
       </div>
 
       <div
@@ -57,25 +68,37 @@ function CoverLetterReady() {
         onMouseEnter={animateClickToCopy}
         onMouseLeave={animateClickToCopy}
         onClick={() => {
-          navigator.clipboard.writeText(coverLetter);
-          toast.success("Successfully copied!");
+          if (!editMode) {
+            navigator.clipboard.writeText(coverLetter);
+            toast.success("Successfully copied!");
+          }
         }}>
-        <div className="absolute h-[99%] z-10 w-full transition-all hover:cursor-pointer hover:bg-accentBlue/5" />
+        {!editMode && (
+          <>
+            <div className="absolute h-[99%] z-10 w-full transition-all hover:cursor-pointer hover:bg-accentBlue/5" />
 
-        <div
-          ref={clickToCopyRef}
-          className="absolute transition-all duration-300 top-0 right-[-50%] p-5">
-          <Button
-            text="Click to copy"
-            image={{ url: clickToCopySVG, alt: "click to copy cover letter" }}
-            isBlue
-          />
-        </div>
+            <div
+              ref={clickToCopyRef}
+              className="absolute transition-all duration-300 top-0 right-[-100%] p-5">
+              <Button
+                text="Click to copy"
+                image={{
+                  url: clickToCopySVG,
+                  alt: "click to copy cover letter",
+                }}
+                isBlue
+              />
+            </div>
+          </>
+        )}
 
         <ResizableTextArea
-          readOnly
+          editMode
           value={coverLetter}
-          className="text-sm hover:cursor-pointer"
+          onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
+            setCoverLetter(e.target.value)
+          }
+          className={`text-sm ${editMode ? "" : "hover:cursor-pointer"}`}
         />
       </div>
     </motion.div>

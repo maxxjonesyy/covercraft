@@ -13,13 +13,15 @@ function CustomTextArea(props: any) {
       }
     }
 
-    textArea?.addEventListener("input", resizeTextArea);
-    resizeTextArea();
+    if (props.editMode) {
+      textArea?.addEventListener("input", resizeTextArea);
+      resizeTextArea();
 
-    return () => {
-      textArea?.removeEventListener("input", resizeTextArea);
-    };
-  }, []);
+      return () => {
+        textArea?.removeEventListener("input", resizeTextArea);
+      };
+    }
+  }, [props.editMode]);
 
   return <textarea ref={textAreaRef} {...props} cols={50} rows={12} />;
 }
