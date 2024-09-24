@@ -63,6 +63,8 @@ function useAxiosInstance() {
           toast.error("Your session has expired. Please log in again.");
           logout();
           return Promise.reject(refreshError);
+        } finally {
+          originalRequest._retry = false;
         }
       }
 
