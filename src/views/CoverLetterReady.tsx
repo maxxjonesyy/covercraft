@@ -6,6 +6,8 @@ import toast from "react-hot-toast";
 import backArrowSVG from "../assets/icons/back-arrow.svg";
 import clickToCopySVG from "../assets/icons/click-to-copy.svg";
 import saveSVG from "../assets/icons/save.svg";
+import downloadSVG from "../assets/icons/download.svg";
+import editSVG from "../assets/icons/edit.svg";
 
 function CoverLetterReady() {
   const navigate = useNavigate();
@@ -24,6 +26,39 @@ function CoverLetterReady() {
     }
   }
 
+  function downloadAsDOC() {
+    const htmlContent = `
+      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
+        <head>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              font-size: 12pt;
+            }
+          </style>
+        </head>
+        <body>
+          ${coverLetter.replace(/\n/g, "<br>")}
+        </body>
+      </html>
+    `;
+
+    const blob = new Blob(["\ufeff", htmlContent], {
+      type: "application/msword",
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${formData.company} - covercraft.doc`;
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  }
+
   useEffect(() => {
     if (!coverLetter || !formData) {
       navigate("/coverletter");
@@ -35,30 +70,41 @@ function CoverLetterReady() {
       animate={{ y: 0, opacity: 1 }}
       initial={{ y: 300, opacity: 0 }}
       className="container">
-      <h1 className="text-3xl">
-        {formData.title} at {formData.company}
-      </h1>
-      <p className="mt-3">
-        Click to copy or save to your collection - it's that simple!
-      </p>
-
-      <div className="flex items-center justify-between max-w-3xl  mt-10">
+      <div className="mb-10">
         <Button
           text="Back to form"
           image={{ url: backArrowSVG, alt: "back to form" }}
           onClick={() => navigate("/coverletter")}
           isBlue
         />
+      </div>
 
+      <h1 className="text-3xl">
+        {formData.title} at {formData.company}
+      </h1>
+
+      <p className="mt-3">
+        Simply edit if you'd like to make changes. If you're happy, you may
+        download as a word document, or save it for later.
+      </p>
+
+      <div className="flex flex-wrap items-center max-w-3xl  mt-10">
         <div className="flex gap-2">
+          <Button
+            text="Download"
+            onClick={downloadAsDOC}
+            image={{ url: downloadSVG, alt: "download cover letter" }}
+          />
+
           <Button
             text="Save"
             image={{ url: saveSVG, alt: "save cover letter" }}
           />
 
           <Button
-            text={editMode ? "Done" : "Edit"}
+            text={editMode ? "Save changes" : "Edit"}
             onClick={() => setEditMode(!editMode)}
+            image={{ url: editSVG, alt: "edit cover letter" }}
           />
         </div>
       </div>
