@@ -144,7 +144,9 @@ function CoverLetterReady() {
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) =>
             setCoverLetter(e.target.value)
           }
-          className={`text-sm ${editMode ? "" : "hover:cursor-pointer"}`}
+          className={`text-sm overflow-scroll ${
+            editMode ? "" : "hover:cursor-pointer"
+          }`}
         />
       </div>
     </motion.div>
