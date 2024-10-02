@@ -6,6 +6,8 @@ import {
   Register,
   CoverLetterCreate,
   CoverLetterReady,
+  Profile,
+  Token,
 } from "./views/index";
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/coverletter" element={<CoverLetterCreate />} />
         <Route path="/coverletter/result" element={<CoverLetterReady />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/token" element={<Token />} />
       </Routes>
     </div>
   );
