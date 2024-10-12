@@ -1,8 +1,37 @@
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 const User = require("../models/user");
+
+class Verify {
+  static checkName(name) {
+    if (validator.isLength(name, { min: 1, max: 15 })) {
+      return true;
+    } else {
+      return res
+        .status(400)
+        .json({ error: "Name must be between 1 and 15 characters" });
+    }
+  }
+
+  static checkEmail(email) {
+    if (validator.isEmail(email)) {
+      return true;
+    } else {
+      return res
+        .status(400)
+        .json({ error: "Please enter a valid email address" });
+    }
+  }
+
+  static checkPassword(password) {
+    if (validator.isStrongPassword(password)) {
+      return true;
+    } else {
+      return res.status(400).json({ error: "Password is not strong enough" });
+    }
+  }
+}
 
 async function register(req, res) {
   try {
@@ -12,29 +41,15 @@ async function register(req, res) {
       return res.status(400).json({ error: "All fields are required" });
     }
 
-    if (!validator.isLength(name, { min: 1, max: 15 })) {
-      return res
-        .status(400)
-        .json({ error: "Name must be between 1 and 15 characters" });
-    }
-
-    if (!validator.isEmail(email)) {
-      return res
-        .status(400)
-        .json({ error: "Please enter a valid email address" });
-    }
-
-    if (!validator.isStrongPassword(password)) {
-      return res.status(400).json({
-        error: "Password is not strong enough",
-      });
-    }
-
     const user = await User.findOne({ email });
 
     if (user) {
       return res.status(400).json({ error: "Email is already in use" });
     }
+
+    Verify.checkName(name);
+    Verify.checkEmail(email);
+    Verify.checkPassword(password);
 
     const newUser = new User({
       name,
@@ -89,6 +104,8 @@ async function login(req, res) {
       data: {
         name: user.name,
         email: user.email,
+        tokenCount: user.tokenCount,
+        totalCoverLetters: user.totalCoverLetters,
         token: token,
       },
     });
@@ -98,4 +115,58 @@ async function login(req, res) {
   }
 }
 
-module.exports = { register, login };
+async function updateProfile(req, res) {
+  const { fieldToUpdate, currentEmail } = req.body;
+  const { name, email, currentPassword, newPassword } = req.body;
+
+  function updatedUser(user) {
+    return {
+      name: user.name,
+      email: user.email,
+    };
+  }
+
+  try {
+    const user = await User.findOne({ email: currentEmail });
+
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    if (fieldToUpdate === "name" && name && Verify.checkName(name)) {
+      user.name = name;
+      await user.save();
+      return res.status(200).json({ data: updatedUser(user) });
+    }
+
+    if (fieldToUpdate === "email" && email && Verify.checkEmail(email)) {
+      user.email = email;
+      await user.save();
+      return res.status(200).json({ data: updatedUser(user) });
+    }
+
+    if (
+      fieldToUpdate === "password" &&
+      newPassword &&
+      Verify.checkPassword(newPassword)
+    ) {
+      const passwordMatch = await bcrypt.compare(
+        currentPassword,
+        user.password
+      );
+
+      if (!passwordMatch) {
+        return res.status(400).json({ error: "Current password is incorrect" });
+      }
+
+      user.password = await bcrypt.hash(newPassword, 10);
+      await user.save();
+      return res.status(200).json({ data: updatedUser(user) });
+    }
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ error: "An error occurred while updating profile" });
+  }
+}
+
+module.exports = { register, login, updateProfile };
