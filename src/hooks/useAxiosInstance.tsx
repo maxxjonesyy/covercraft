@@ -12,8 +12,8 @@ function useAxiosInstance() {
 
   axiosInstance.interceptors.request.use(
     (request) => {
-      const tokenAndCredentials = ["/coverletter"];
-      const credentials = ["/refresh-token", "/login"];
+      const tokenAndCredentials = ["/coverletter", "/profile"];
+      const credentials = ["/refresh-token", "/login", "/profile"];
 
       if (
         tokenAndCredentials.includes(request.url as string) &&
