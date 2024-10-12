@@ -13,7 +13,7 @@ function Navbar() {
   const tokenCount = user?.tokenCount;
 
   return (
-    <nav className="max-w-[75rem] mx-auto flex items-center justify-between mx-auto py-5">
+    <nav className="max-w-[75rem] flex items-center justify-between mx-auto py-5">
       <Link to="/">
         <h1 className="text-xl md:text-2xl">Covercraft</h1>
       </Link>
