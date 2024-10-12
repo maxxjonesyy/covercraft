@@ -1,8 +1,9 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState, useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ResizableTextArea, Loader } from "../components/index";
+import { UserContext } from "../context/UserContext";
 import toast from "react-hot-toast";
 import extractFileText from "../utils/extractFileText";
 import useCoverLetterForm from "../hooks/useCoverLetterForm";
@@ -19,6 +20,7 @@ interface CoverletterFormData {
 function CoverletterCreate() {
   const navigate = useNavigate();
   const axiosInstance = useAxiosInstance();
+  const { user, setUser } = useContext(UserContext);
 
   const [coverLetter, setCoverLetter] = useState("");
   const { formData, setFormData, handleChange, validateForm } =
@@ -26,15 +28,26 @@ function CoverletterCreate() {
 
   const handleCoverletter = useMutation({
     mutationFn: async (formData: CoverletterFormData) =>
-      await axiosInstance.post("/coverletter", formData),
+      await axiosInstance.post("/coverletter", {
+        ...formData,
+        email: user?.email,
+      }),
     onMutate: () => {
       toast.loading("Generating cover letter...");
     },
     onSuccess: (response) => {
-      const { data } = response.data;
+      const { data, totalCoverLetters } = response.data;
 
       if (data) {
         toast.dismiss();
+
+        setUser((prev: any) => {
+          return {
+            ...prev,
+            totalCoverLetters,
+          };
+        });
+
         setCoverLetter(data);
         toast.success("Cover letter generated successfully!");
       }
