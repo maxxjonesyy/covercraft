@@ -10,6 +10,7 @@ import tokenSVG from "../../assets/icons/token.svg";
 
 function Navbar() {
   const { user } = useContext(UserContext);
+  const tokenCount = user?.tokenCount;
 
   return (
     <nav className="max-w-[75rem] mx-auto flex items-center justify-between mx-auto py-5">
@@ -24,7 +25,7 @@ function Navbar() {
               <ButtonLink text="Create" pathname="/coverletter" />
             </li>
             <li>
-              <DropDownMenu />
+              <DropDownMenu tokenCount={tokenCount} />
             </li>
           </>
         ) : (
@@ -46,7 +47,7 @@ function Navbar() {
   );
 }
 
-function DropDownMenu() {
+function DropDownMenu({ tokenCount }: { tokenCount: number | undefined }) {
   const { logout } = useContext(UserContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -73,6 +74,10 @@ function DropDownMenu() {
       {isMenuOpen && (
         <aside className="absolute top-7 right-0 w-44 rounded border border-gray-200 shadow-md">
           <div className="flex flex-col">
+            <p className="text-center p-2.5 bg-accentBlue/10">
+              Tokens: <b>{tokenCount}</b>
+            </p>
+
             <Link
               className="flex items-center gap-2 border-b border-gray-200 p-2.5 transition-color duration-300 hover:bg-gray-100"
               to="/profile">
