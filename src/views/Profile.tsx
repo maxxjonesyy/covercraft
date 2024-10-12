@@ -259,6 +259,15 @@ function ProfileTab({ user, setUser }: ProfileTabProps) {
     </motion.div>
   );
 }
+
+function CoverLettersTab() {
+  return (
+    <motion.div
+      transition={{ duration: 1 }}
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      className="mt-10">
+      <h1>Cover Letters</h1>
     </motion.div>
   );
 }
