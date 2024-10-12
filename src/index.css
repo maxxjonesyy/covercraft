@@ -61,6 +61,10 @@
   .container {
     @apply max-w-3xl mx-auto py-[6rem];
   }
+
+  .tab--active {
+    @apply border-b-2 border-accentBlue;
+  }
 }
 
 @layer utilities {
