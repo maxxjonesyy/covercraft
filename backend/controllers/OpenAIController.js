@@ -10,13 +10,19 @@ async function createCoverLetter(req, res) {
     return res.status(400).json({ error: "All fields are required" });
   }
 
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(400).json({ error: "User not found" });
+  }
+
+  if (user.tokenCount === 0) {
+    return res
+      .status(400)
+      .json({ error: "Insufficient tokens, purchase more and try again" });
+  }
+
   try {
-    const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(400).json({ error: "User not found" });
-    }
-
     const completion = await openai.chat.completions.create({
       messages: [
         {
