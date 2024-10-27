@@ -1,17 +1,22 @@
-import { useEffect, useState, useRef, ChangeEvent } from "react";
+import { useEffect, useState, useRef, ChangeEvent, useContext } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ResizableTextArea, Button } from "../components/index";
+import { useMutation } from "@tanstack/react-query";
+import { UserContext } from "../context/UserContext";
 import toast from "react-hot-toast";
 import backArrowSVG from "../assets/icons/back-arrow.svg";
 import clickToCopySVG from "../assets/icons/click-to-copy.svg";
 import saveSVG from "../assets/icons/save.svg";
 import downloadSVG from "../assets/icons/download.svg";
 import editSVG from "../assets/icons/edit.svg";
+import useAxiosInstance from "../hooks/useAxiosInstance";
 
 function CoverLetterReady() {
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosInstance = useAxiosInstance();
 
   const clickToCopyRef = useRef<HTMLDivElement>(null);
   let { formData, coverLetterCopy } = location.state;
@@ -25,6 +30,25 @@ function CoverLetterReady() {
       clickToCopyRef.current.classList.toggle("right-[0%]");
     }
   }
+
+  const saveCoverLetter = useMutation({
+    mutationFn: async () => {
+      await axiosInstance.post("/savedCoverLetters", {
+        title: formData.title,
+        company: formData.company,
+        coverLetter,
+        email: user?.email,
+      });
+    },
+    onMutate: () => {
+      toast.loading("Saving cover letter...");
+    },
+
+    onSuccess: () => {
+      toast.dismiss();
+      toast.success("Cover letter saved");
+    },
+  });
 
   function downloadAsDOC() {
     const htmlContent = `
@@ -80,7 +104,8 @@ function CoverLetterReady() {
       </div>
 
       <h1 className="text-3xl">
-        {formData.title} at {formData.company}
+        {formData.title} at{" "}
+        <span className="text-accentBlue">{formData.company}</span>
       </h1>
 
       <p className="mt-3">
@@ -97,6 +122,7 @@ function CoverLetterReady() {
           />
 
           <Button
+            onClick={() => saveCoverLetter.mutate()}
             text="Save"
             image={{ url: saveSVG, alt: "save cover letter" }}
           />
