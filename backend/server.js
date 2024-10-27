@@ -35,6 +35,7 @@ app.use(escapeInputs);
 app.use("/", require("./routes/openai-routes"));
 app.use("/", require("./routes/token-routes"));
 app.use("/", require("./routes/user-routes"));
+app.use("/", require("./routes/coverletter-routes"));
 
 connectMongoDB()
   .then(() => {
