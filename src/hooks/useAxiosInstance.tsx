@@ -12,13 +12,27 @@ function useAxiosInstance() {
 
   axiosInstance.interceptors.request.use(
     (request) => {
-      const tokenAndCredentials = ["/coverletter", "/profile"];
-      const credentials = ["/refresh-token", "/login", "/profile"];
+      const tokenAndCredentials = [
+        "/coverletter",
+        "/profile",
+        "/savedCoverLetters",
+      ];
+      const credentials = [
+        "/refresh-token",
+        "/login",
+        "/profile",
+        "/savedCoverLetters",
+      ];
 
-      if (
-        tokenAndCredentials.includes(request.url as string) &&
-        !request.headers["Authorization"]
-      ) {
+      const matchesTokenRoute = tokenAndCredentials.some((route) =>
+        request.url?.startsWith(route)
+      );
+
+      const matchesCredentialRoute = credentials.some((route) =>
+        request.url?.startsWith(route)
+      );
+
+      if (matchesTokenRoute && !request.headers["Authorization"]) {
         if (!user?.token) {
           toast.error("No token found. Please log in again.");
         }
@@ -27,7 +41,7 @@ function useAxiosInstance() {
         request.withCredentials = true;
       }
 
-      if (credentials.includes(request.url as string)) {
+      if (matchesCredentialRoute) {
         request.withCredentials = true;
       }
 
