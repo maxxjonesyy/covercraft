@@ -2,14 +2,17 @@ import { ChangeEvent, useState, useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { motion } from "framer-motion";
 import { User } from "../types/types";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "../components";
+import { Loader } from "../components";
 import profileSVG from "../assets/icons/profile.svg";
 import saveSVG from "../assets/icons/save.svg";
 import useAxiosInstance from "../hooks/useAxiosInstance";
 import toast from "react-hot-toast";
+import createReadableDate from "../utils/createReadableDate";
 
 function Profile() {
+  const axiosInstance = useAxiosInstance();
   const [isProfileOpen, setIsProfileOpen] = useState(true);
   const { user, setUser } = useContext(UserContext);
 
@@ -53,9 +56,13 @@ function Profile() {
       </div>
 
       {isProfileOpen ? (
-        <ProfileTab user={user} setUser={setUser} />
+        <ProfileTab
+          user={user}
+          setUser={setUser}
+          axiosInstance={axiosInstance}
+        />
       ) : (
-        <CoverLettersTab />
+        <CoverLettersTab user={user} axiosInstance={axiosInstance} />
       )}
     </motion.div>
   );
@@ -64,6 +71,7 @@ function Profile() {
 interface ProfileTabProps {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  axiosInstance: ReturnType<typeof useAxiosInstance>;
 }
 
 interface updatedInfoProps {
@@ -75,8 +83,7 @@ interface updatedInfoProps {
   newPassword?: string;
 }
 
-function ProfileTab({ user, setUser }: ProfileTabProps) {
-  const axiosInstance = useAxiosInstance();
+function ProfileTab({ user, setUser, axiosInstance }: ProfileTabProps) {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [updatedInfo, setUpdatedInfo] = useState<updatedInfoProps>({
     currentEmail: user?.email as string,
@@ -260,14 +267,81 @@ function ProfileTab({ user, setUser }: ProfileTabProps) {
   );
 }
 
-function CoverLettersTab() {
+interface CoverLettersTabProps {
+  user: User | null;
+  axiosInstance: ReturnType<typeof useAxiosInstance>;
+}
+
+function CoverLettersTab({ user, axiosInstance }: CoverLettersTabProps) {
+  const getCoverLetters = useQuery({
+    queryKey: ["coverLetters"],
+    queryFn: async () => {
+      const response = await axiosInstance.get("/savedCoverLetters", {
+        params: { email: user?.email },
+      });
+
+      return response.data;
+    },
+  });
+
+  const deleteCoverLetter = useMutation({
+    mutationFn: async (id: string) =>
+      await axiosInstance.delete(`/savedCoverLetters/${id}`, {
+        params: { email: user?.email },
+      }),
+
+    onSuccess: () => {
+      toast.success("Cover letter removed");
+      getCoverLetters.refetch();
+    },
+  });
+
   return (
     <motion.div
       transition={{ duration: 1 }}
       animate={{ opacity: 1 }}
       initial={{ opacity: 0 }}
       className="mt-10">
-      <h1>Cover Letters</h1>
+      {getCoverLetters.isLoading && (
+        <div className="flex justify-center mt-20">
+          <Loader size={28} colour="black" />
+        </div>
+      )}
+
+      {!getCoverLetters.isLoading && getCoverLetters.data?.length === 0 && (
+        <h1>No saved cover letters</h1>
+      )}
+
+      <section className="w-full">
+        {getCoverLetters.data &&
+          getCoverLetters?.data.map((item: any) => {
+            const convertedDate = createReadableDate(item.createdAt);
+            const convertedText = item.coverLetter.split("\n").join("<br/>");
+
+            return (
+              <div
+                key={item._id}
+                className="mt-3 p-3 border border-accentBlue/20 rounded shadow-sm transition-colors duration-300 hover:bg-accentBlue/10">
+                <div className="flex justify-between">
+                  <p className="text-xs mb-3">{convertedDate}</p>
+
+                  <button
+                    onClick={() => deleteCoverLetter.mutate(item._id)}
+                    className="p-1.5 bg-red-100 border border-red-300 text-xs rounded">
+                    Delete
+                  </button>
+                </div>
+
+                <div className="inline-flex flex-wrap items-center gap-2">
+                  <p className="font-bold text-accentBlue">{item.company},</p>
+                  <p className="text-sm">{item.title}</p>
+                </div>
+
+                {/* <span dangerouslySetInnerHTML={{ __html: convertedText }} /> */}
+              </div>
+            );
+          })}
+      </section>
     </motion.div>
   );
 }
