@@ -322,13 +322,13 @@ function CoverLettersTab({ user, axiosInstance }: CoverLettersTabProps) {
               <div
                 key={item._id}
                 className="mt-3 p-3 border border-accentBlue/20 rounded shadow-sm transition-colors duration-300 hover:bg-accentBlue/10">
-                <div className="flex justify-between">
+                <div className="flex items-center justify-between">
                   <p className="text-xs mb-3">{convertedDate}</p>
 
                   <button
                     onClick={() => deleteCoverLetter.mutate(item._id)}
-                    className="p-1.5 bg-red-100 border border-red-300 text-xs rounded">
-                    Delete
+                    className="p-1 mb-3 bg-red-100 border border-red-300 text-xs rounded">
+                    Remove
                   </button>
                 </div>
 
