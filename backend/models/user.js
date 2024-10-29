@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const coverLetterSchema = new mongoose.Schema({
   title: { type: String, required: true },
   company: { type: String, required: true },
-  coverletter: { type: String, required: true },
+  coverLetter: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 
