@@ -11,6 +11,7 @@ import saveSVG from "../assets/icons/save.svg";
 import downloadSVG from "../assets/icons/download.svg";
 import editSVG from "../assets/icons/edit.svg";
 import useAxiosInstance from "../hooks/useAxiosInstance";
+import downloadAsDOC from "../utils/downloadAsDOC";
 import copyToClipboard from "../utils/copyToClipboard";
 
 function CoverLetterReady() {
@@ -51,39 +52,6 @@ function CoverLetterReady() {
     },
   });
 
-  function downloadAsDOC() {
-    const htmlContent = `
-      <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
-        <head>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              font-size: 12pt;
-            }
-          </style>
-        </head>
-        <body>
-          ${coverLetter.replace(/\n/g, "<br>")}
-        </body>
-      </html>
-    `;
-
-    const blob = new Blob(["\ufeff", htmlContent], {
-      type: "application/msword",
-    });
-
-    const url = URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${formData.company} - covercraft.doc`;
-    document.body.appendChild(link);
-    link.click();
-
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  }
-
   useEffect(() => {
     if (!coverLetter || !formData) {
       navigate("/coverletter");
@@ -118,7 +86,7 @@ function CoverLetterReady() {
         <div className="flex gap-2">
           <Button
             text="Download"
-            onClick={downloadAsDOC}
+            onClick={() => downloadAsDOC(coverLetter, formData.company)}
             image={{ url: downloadSVG, alt: "download cover letter" }}
           />
 
