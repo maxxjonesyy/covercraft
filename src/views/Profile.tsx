@@ -10,6 +10,8 @@ import saveSVG from "../assets/icons/save.svg";
 import useAxiosInstance from "../hooks/useAxiosInstance";
 import toast from "react-hot-toast";
 import createReadableDate from "../utils/createReadableDate";
+import downloadAsDOC from "../utils/downloadAsDOC";
+import copyToClipboard from "../utils/copyToClipboard";
 
 function Profile() {
   const axiosInstance = useAxiosInstance();
@@ -296,6 +298,18 @@ function CoverLettersTab({ user, axiosInstance }: CoverLettersTabProps) {
     },
   });
 
+  function toggleCoverLetterDescription(id: string) {
+    document.querySelectorAll("#cl-description").forEach((description) => {
+      const descriptionId = description.getAttribute("data-id");
+
+      if (descriptionId === id) {
+        description.classList.toggle("hidden");
+      } else {
+        description.classList.add("hidden");
+      }
+    });
+  }
+
   return (
     <motion.div
       transition={{ duration: 1 }}
@@ -321,7 +335,8 @@ function CoverLettersTab({ user, axiosInstance }: CoverLettersTabProps) {
             return (
               <div
                 key={item._id}
-                className="mt-3 p-3 border border-accentBlue/20 rounded shadow-sm transition-colors duration-300 hover:bg-accentBlue/10">
+                onClick={() => toggleCoverLetterDescription(item._id)}
+                className="mt-3 p-3 border border-accentBlue/20 rounded shadow-sm transition-colors duration-300 hover:bg-accentBlue/5 hover:cursor-pointer">
                 <div className="flex items-center justify-between">
                   <p className="text-xs mb-3">{convertedDate}</p>
 
@@ -337,7 +352,27 @@ function CoverLettersTab({ user, axiosInstance }: CoverLettersTabProps) {
                   <p className="text-sm">{item.title}</p>
                 </div>
 
-                {/* <span dangerouslySetInnerHTML={{ __html: convertedText }} /> */}
+                <div className="flex items-center gap-1 mt-3">
+                  <Button
+                    onClick={() =>
+                      downloadAsDOC(item.coverLetter, item.company)
+                    }
+                    text="Download"
+                    textSize="text-xs"
+                  />
+                  <Button
+                    onClick={() => copyToClipboard(convertedText)}
+                    text="Copy"
+                    textSize="text-xs"
+                  />
+                </div>
+
+                <div
+                  id="cl-description"
+                  data-id={item._id}
+                  className="mt-5 text-sm hidden">
+                  <span dangerouslySetInnerHTML={{ __html: convertedText }} />
+                </div>
               </div>
             );
           })}
