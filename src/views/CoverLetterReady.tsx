@@ -11,6 +11,7 @@ import saveSVG from "../assets/icons/save.svg";
 import downloadSVG from "../assets/icons/download.svg";
 import editSVG from "../assets/icons/edit.svg";
 import useAxiosInstance from "../hooks/useAxiosInstance";
+import copyToClipboard from "../utils/copyToClipboard";
 
 function CoverLetterReady() {
   const { user } = useContext(UserContext);
@@ -141,8 +142,7 @@ function CoverLetterReady() {
         onMouseLeave={animateClickToCopy}
         onClick={() => {
           if (!editMode) {
-            navigator.clipboard.writeText(coverLetter);
-            toast.success("Successfully copied!");
+            copyToClipboard(coverLetter);
           }
         }}>
         {!editMode && (
