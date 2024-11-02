@@ -10,14 +10,14 @@ import useCoverLetterForm from "../hooks/useCoverLetterForm";
 import createSVG from "../assets/icons/create.svg";
 import useAxiosInstance from "../hooks/useAxiosInstance";
 
-interface CoverletterFormData {
+interface CoverLetterFormData {
   title: string;
   company: string;
   description: string;
   resume: string;
 }
 
-function CoverletterCreate() {
+function CoverLetterCreate() {
   const navigate = useNavigate();
   const axiosInstance = useAxiosInstance();
   const { user, setUser } = useContext(UserContext);
@@ -27,8 +27,8 @@ function CoverletterCreate() {
     useCoverLetterForm();
 
   const handleCoverletter = useMutation({
-    mutationFn: async (formData: CoverletterFormData) =>
-      await axiosInstance.post("/coverletter", {
+    mutationFn: async (formData: CoverLetterFormData) =>
+      await axiosInstance.post("/coverLetter", {
         ...formData,
         email: user?.email,
       }),
@@ -138,4 +138,4 @@ function CoverletterCreate() {
   );
 }
 
-export default CoverletterCreate;
+export default CoverLetterCreate;

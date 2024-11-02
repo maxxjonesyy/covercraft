@@ -13,7 +13,7 @@ function useAxiosInstance() {
   axiosInstance.interceptors.request.use(
     (request) => {
       const tokenAndCredentials = [
-        "/coverletter",
+        "/coverLetter",
         "/profile",
         "/savedCoverLetters",
       ];
