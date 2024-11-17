@@ -101,7 +101,7 @@ function Register() {
 
       <button
         type="submit"
-        className="flex items-center justify-center gap-5 my-3 w-full max-w-lg bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
+        className="flex items-center justify-center gap-5 my-3 w-full max-w-xl bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
         {register.isPending && <Loader />}
         Register
       </button>
