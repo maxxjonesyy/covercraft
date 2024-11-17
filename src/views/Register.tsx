@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ReactQueryError } from "../types/types";
 import { useNavigate } from "react-router-dom";
 import { Loader } from "../components/index";
+import TickSVG from "../components/TickSVG";
 import useRegisterForm from "../hooks/useRegisterForm";
 import useAxiosInstance from "../hooks/useAxiosInstance";
 import toast from "react-hot-toast";
@@ -100,7 +101,7 @@ function Register() {
 
       <button
         type="submit"
-        className="flex items-center justify-center gap-5 my-3 max-w-xl w-full max-w-lg bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
+        className="flex items-center justify-center gap-5 my-3 w-full max-w-lg bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
         {register.isPending && <Loader />}
         Register
       </button>
@@ -139,21 +140,6 @@ function Register() {
         </li>
       </ul>
     </motion.form>
-  );
-}
-
-function TickSVG() {
-  return (
-    <svg
-      className="text-accentBlue w-6 h-6 inline"
-      fill="currentColor"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg">
-      <path
-        fillRule="evenodd"
-        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-        clipRule="evenodd"></path>
-    </svg>
   );
 }
 
