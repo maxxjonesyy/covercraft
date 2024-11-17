@@ -24,7 +24,7 @@ function FeaturedPriceCard({
   }
 
   return (
-    <div className="relative flex flex-col border border-t-4 border-t-accentBlue p-5 rounded-xl w-full min-h-[425px] max-w-[300px] shadow">
+    <div className="relative flex flex-col border border-t-4 border-t-accentBlue p-5 rounded-xl w-full min-h-[450px] max-w-[300px] shadow">
       <p className="md:text-lg mb-2">{tokenCount} tokens</p>
       <p className="font-bold text-2xl border-b border-gray-200 pb-5">
         ${price}{" "}
