@@ -72,10 +72,10 @@ function DropDownMenu({ tokenCount }: { tokenCount: number | undefined }) {
       </div>
 
       {isMenuOpen && (
-        <aside className="absolute top-7 right-0 w-44 rounded border border-gray-200 shadow-md">
+        <aside className="absolute top-7 right-0 w-52 rounded border border-gray-200 shadow-md">
           <div className="flex flex-col">
-            <p className="text-center p-2.5 bg-accentBlue/10">
-              Tokens: <b>{tokenCount}</b>
+            <p className="text-center p-2.5 border-b border-gray-200">
+              Tokens: <b className="text-accentBlue text-base">{tokenCount}</b>
             </p>
 
             <Link
@@ -102,7 +102,7 @@ function DropDownMenu({ tokenCount }: { tokenCount: number | undefined }) {
 
             <button
               onClick={logout}
-              className="p-2.5 bg-accentBlue/80 text-white transition-color duration-300 hover:bg-accentBlue">
+              className="p-2.5 bg-accentBlue/80 text-white transition-color duration-300 hover:bg-accentBlue rounded-b-md">
               Logout
             </button>
           </div>
