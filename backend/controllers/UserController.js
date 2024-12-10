@@ -169,4 +169,44 @@ async function updateProfile(req, res) {
   }
 }
 
-module.exports = { register, login, updateProfile };
+async function addTokensToUser(email, tokensToAdd) {
+  try {
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      console.log("addTokensToUser: User not found");
+      return false;
+    }
+
+    if (!tokensToAdd) {
+      console.log("addTokensToUser: no tokens found");
+      return false;
+    }
+
+    user.tokenCount = Number(user.tokenCount) + Number(tokensToAdd);
+    await user.save();
+
+    return true;
+  } catch (error) {
+    console.error("Error adding tokens to user:", error);
+    return false;
+  }
+}
+
+async function getTokens(email) {
+  try {
+    const user = await User.findOne({ email });
+
+    return Number(user.tokenCount);
+  } catch (error) {
+    console.error("Error getting tokens:", error);
+  }
+}
+
+module.exports = {
+  register,
+  login,
+  updateProfile,
+  addTokensToUser,
+  getTokens,
+};
