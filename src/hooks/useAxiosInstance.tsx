@@ -16,12 +16,14 @@ function useAxiosInstance() {
         "/coverLetter",
         "/profile",
         "/savedCoverLetters",
+        "/create-checkout-session",
       ];
       const credentials = [
         "/refresh-token",
         "/login",
         "/profile",
         "/savedCoverLetters",
+        "/create-checkout-session",
       ];
 
       const matchesTokenRoute = tokenAndCredentials.some((route) =>

@@ -1,10 +1,13 @@
+import { useMutation } from "@tanstack/react-query";
 import TickSVG from "./TickSVG";
+import useAxiosInstance from "../hooks/useAxiosInstance";
+import toast from "react-hot-toast";
 
 interface PriceCardProps {
   tokenCount: number;
   price: number;
   pricePerToken: number;
-  paymentUrl: string;
+  priceId: string;
   bonusTokens?: number;
 }
 
@@ -12,9 +15,11 @@ function PriceCard({
   tokenCount,
   price,
   pricePerToken,
+  priceId,
   bonusTokens,
-  paymentUrl,
 }: PriceCardProps) {
+  const axiosInstance = useAxiosInstance();
+
   function handlePricePerToken(pricePerToken: number) {
     if (pricePerToken < 1) {
       return `${pricePerToken.toFixed(2)}c`;
@@ -22,6 +27,23 @@ function PriceCard({
 
     return `${pricePerToken.toFixed(0)}`;
   }
+
+  const createCheckoutSession = useMutation({
+    mutationFn: async () =>
+      await axiosInstance.post("/create-checkout-session", {
+        priceId,
+      }),
+    onMutate: () => {
+      toast.loading("Redirecting...");
+    },
+    onSuccess: ({ data }) => {
+      toast.dismiss();
+
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    },
+  });
 
   return (
     <div className="flex flex-col border p-5 rounded-xl w-full max-h-[400px] max-w-[300px] shadow">
@@ -52,11 +74,11 @@ function PriceCard({
         )}
       </ul>
 
-      <a
-        href={paymentUrl}
+      <button
+        onClick={() => createCheckoutSession.mutate()}
         className="mt-10 block w-full text-center bg-accentBlue text-white py-1.5 rounded-2xl">
         Purchase
-      </a>
+      </button>
     </div>
   );
 }
