@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import StripeBadge from "../assets/images/Powered by Stripe - black.svg";
 
 function Token() {
   const { setUser } = useContext(UserContext);
@@ -59,11 +60,16 @@ function Token() {
 
   return (
     <motion.div animate={{ y: 0, opacity: 1 }} initial={{ y: 300, opacity: 0 }}>
-      <div className="container">
+      <div className="container pb-[3rem] flex flex-col items-center">
+        <img src={StripeBadge} alt="Stripe" className="h-8 w-auto mb-10" />
         <h1 className="text-3xl mb-2">Add Tokens</h1>
+
+        <p className="text-gray-600">
+          Use tokens to generate high-quality, tailored cover letters.
+        </p>
       </div>
 
-      <section className="flex justify-center flex-wrap gap-3">
+      <section className="flex flex-col md:flex-row justify-center gap-6 px-4 md:px-8 lg:px-12 py-10">
         <PriceCard
           tokenCount={5}
           price={5}

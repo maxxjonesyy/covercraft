@@ -46,7 +46,7 @@ function PriceCard({
   });
 
   return (
-    <div className="flex flex-col border p-5 rounded-xl w-full max-h-[400px] max-w-[300px] shadow">
+    <div className="flex flex-col border p-5 rounded-xl w-full max-h-[400px] md:max-w-[300px] shadow transition-shadow duration-300 hover:shadow-lg hover:shadow-accentBlue/40">
       <p className="md:text-lg mb-2">{tokenCount} tokens</p>
       <p className="font-bold text-2xl border-b border-gray-200 pb-5">
         ${price}{" "}
