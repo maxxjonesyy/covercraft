@@ -59,7 +59,7 @@
 
 @layer components {
   .container {
-    @apply max-w-3xl mx-auto py-[6rem];
+    @apply max-w-3xl mx-auto py-[6rem] p-5;
   }
 
   .tab--active {

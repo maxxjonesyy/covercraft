@@ -7,42 +7,48 @@ import expandableArrowSVG from "../../assets/icons/expandable-arrow.svg";
 import contactSVG from "../../assets/icons/contact.svg";
 import profileSVG from "../../assets/icons/profile.svg";
 import tokenSVG from "../../assets/icons/token.svg";
+import { Zap } from "lucide-react";
 
 function Navbar() {
   const { user } = useContext(UserContext);
   const tokenCount = user?.tokenCount;
 
   return (
-    <nav className="max-w-[75rem] flex items-center justify-between mx-auto py-5">
-      <Link to="/">
-        <h1 className="text-xl md:text-2xl">Covercraft</h1>
-      </Link>
+    <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm w-full">
+      <div className="flex items-center justify-between mx-auto py-5 max-w-[75rem]">
+        <Link to="/" className="flex items-center gap-1 px-4">
+          <Zap className="w-6 h-6 md:w-8 md:h-8 text-accentBlue" />
+          <span className="text-xl md:text-2xl font-bold text-gray-800">
+            Covercraft
+          </span>
+        </Link>
 
-      <ul className="flex items-center gap-1 text-sm">
-        {user ? (
-          <>
-            <li>
-              <ButtonLink text="Create" pathname="/coverletter" />
-            </li>
-            <li>
-              <DropDownMenu tokenCount={tokenCount} />
-            </li>
-          </>
-        ) : (
-          <>
-            <li>
-              <ButtonLink text="Login" pathname="/login" />
-            </li>
-            <li>
-              <ButtonLink
-                text="Register"
-                pathname="/register"
-                image={{ url: loginSVG, alt: "click to login" }}
-              />
-            </li>
-          </>
-        )}
-      </ul>
+        <ul className="flex items-center gap-1 text-sm px-4">
+          {user ? (
+            <>
+              <li>
+                <ButtonLink text="Create" pathname="/coverletter" />
+              </li>
+              <li>
+                <DropDownMenu tokenCount={tokenCount} />
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <ButtonLink text="Login" pathname="/login" />
+              </li>
+              <li>
+                <ButtonLink
+                  text="Register"
+                  pathname="/register"
+                  image={{ url: loginSVG, alt: "click to login" }}
+                />
+              </li>
+            </>
+          )}
+        </ul>
+      </div>
     </nav>
   );
 }
@@ -72,7 +78,7 @@ function DropDownMenu({ tokenCount }: { tokenCount: number | undefined }) {
       </div>
 
       {isMenuOpen && (
-        <aside className="absolute top-7 right-0 w-52 rounded border border-gray-200 shadow-md">
+        <aside className="absolute top-7 right-0 w-52 rounded border border-gray-200 shadow-md bg-white">
           <div className="flex flex-col">
             <p className="text-center p-2.5 border-b border-gray-200">
               Tokens: <b className="text-accentBlue text-base">{tokenCount}</b>
