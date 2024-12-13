@@ -1,10 +1,15 @@
+import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { CheckCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import useAxiosInstance from "../hooks/useAxiosInstance";
 import toast from "react-hot-toast";
 
 function PriceCards() {
   const axiosInstance = useAxiosInstance();
+  const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const planData = [
     {
@@ -100,7 +105,11 @@ function PriceCards() {
             </ul>
 
             <button
-              onClick={() => createCheckoutSession.mutate(plan.priceId)}
+              onClick={() =>
+                !user
+                  ? navigate("/login")
+                  : createCheckoutSession.mutate(plan.priceId)
+              }
               className={`
             w-full py-3 rounded-lg transition-all
             ${
