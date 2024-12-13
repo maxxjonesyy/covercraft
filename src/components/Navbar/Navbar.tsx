@@ -2,12 +2,12 @@ import { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { Link } from "react-router-dom";
 import { ButtonLink } from "../index";
+import { Zap } from "lucide-react";
 import loginSVG from "../../assets/icons/login.svg";
 import expandableArrowSVG from "../../assets/icons/expandable-arrow.svg";
 import contactSVG from "../../assets/icons/contact.svg";
 import profileSVG from "../../assets/icons/profile.svg";
 import tokenSVG from "../../assets/icons/token.svg";
-import { Zap } from "lucide-react";
 
 function Navbar() {
   const { user } = useContext(UserContext);
