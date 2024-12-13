@@ -55,6 +55,8 @@ function CoverLetterCreate() {
   });
 
   useEffect(() => {
+    if (!user) navigate("/login");
+
     if (coverLetter) {
       let coverLetterCopy = coverLetter;
       navigate("/coverletter/result", { state: { coverLetterCopy, formData } });
