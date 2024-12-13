@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
+import { Navbar, Footer } from "./components/index";
+
 import {
   Home,
   Login,
@@ -12,7 +13,7 @@ import {
 
 function App() {
   return (
-    <div className="min-h-screen px-5 bg-gradient-to-b from-white via-white to-indigo-100/80">
+    <div className="min-h-screen bg-gradient-to-b from-white via-white to-indigo-100/80">
       <Navbar />
 
       <Routes>
@@ -24,6 +25,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/token" element={<Token />} />
       </Routes>
+
+      <Footer />
     </div>
   );
 }

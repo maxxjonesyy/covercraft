@@ -1,12 +1,165 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Edit, Zap, Rocket, Award } from "lucide-react";
+import { PriceCards } from "../components";
 
 function Home() {
   return (
     <motion.div
       animate={{ y: 0, opacity: 1 }}
       initial={{ y: 300, opacity: 0 }}
-      className="container">
-      <h1>Home</h1>
+      className="min-h-screen relative overflow-hidden bg-gray-50">
+      <header className="relative pt-24 pb-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 items-center gap-16">
+            <div className="space-y-6 text-left">
+              <h1 className="bg-accentBlue/10 inline-block px-4 py-2 rounded-full text-[#3943B7] text-sm tracking-wide">
+                Cover Letter Generator
+              </h1>
+              <h1 className="text-4xl font-extrabold text-gray-900 leading-tight">
+                Craft{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3943B7] to-purple-600">
+                  Tailored Cover Letters
+                </span>{" "}
+                in Seconds
+              </h1>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Leverage us, to create tailored cover letters that perfectly
+                match your job description and experience.
+              </p>
+
+              <div className="w-xl">
+                <Link to="/coverletter">
+                  <button className="flex items-center bg-gradient-to-r from-[#3943B7] to-purple-600 text-white px-8 py-3 rounded-lg shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 group">
+                    <Zap className="mr-2 group-hover:animate-pulse" />
+                    Create Cover Letter
+                  </button>
+                </Link>
+              </div>
+            </div>
+
+            <div className="relative pt-16 mt-15 md:mt-0 md:block">
+              <h2 className="text-3xl font-bold">How does it work?</h2>
+              <div className="bg-white/80 rounded-2xl shadow-2xl p-6 mt-3 transform -rotate-3 hover:rotate-0 transition-transform">
+                <div className="space-y-3">
+                  <div className="bg-gradient-to-r from-accentBlue/10 to-white rounded-lg p-3 flex items-center">
+                    <p className="text-4xl font-bold text-accentBlue/60 pr-3">
+                      1
+                    </p>
+                    <div className="flex-grow">
+                      <p className="font-bold">Upload Resume</p>
+                      <p className="text-sm text-gray-600">
+                        We will scan this for your experience
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-accentBlue/10 to-white rounded-lg p-3 flex items-center">
+                    <p className="text-4xl font-bold text-accentBlue/60 pr-3">
+                      2
+                    </p>
+                    <div className="flex-grow">
+                      <p className="font-bold">Paste Job Title</p>
+                      <p className="text-sm text-gray-600">
+                        The job title you're applying for
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-accentBlue/10 to-white rounded-lg p-3 flex items-center">
+                    <p className="text-4xl font-bold text-accentBlue/60 pr-3">
+                      3
+                    </p>
+                    <div className="flex-grow">
+                      <p className="font-bold">Paste Job Description</p>
+                      <p className="text-sm text-gray-600">
+                        The full job description you're applying for
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-accentBlue/10 to-white rounded-lg p-3 flex items-center">
+                    <p className="text-4xl font-bold text-accentBlue/60 pr-3">
+                      4
+                    </p>
+                    <div className="flex-grow">
+                      <p className="font-bold">Get Results</p>
+                      <p className="text-sm text-gray-600">
+                        Click create and get results in seconds
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section className="py-24 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-6">
+              Streamline Your Application Process
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Generate, customise, and download impressive cover letters in
+              minutes
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              {
+                icon: <Rocket className="w-10 h-auto text-green-600" />,
+                title: "Rapid Generation",
+                description: "Tailored cover letters, generated in seconds",
+                color: "from-green-100/20 to-[#3943B7]/10",
+                effect: "group-hover:scale-105 group-hover:-rotate-6",
+              },
+              {
+                icon: <Edit className="w-10 h-auto text-accentBlue" />,
+                title: "Customisation",
+                description: "Easily make changes using our editor",
+                color: "from-[#3943B7]/10 to-blue-200/20",
+                effect: "group-hover:scale-105 group-hover:rotate-6",
+              },
+              {
+                icon: <Award className="w-10 h-auto text-purple-600" />,
+                title: "Download and Save",
+                description: "Save for later, or download and apply!",
+                color: "from-purple-100/20 to-[#3943B7]/10",
+                effect: "group-hover:scale-105",
+              },
+            ].map((feature, index) => (
+              <div key={index} className="group relative">
+                <div
+                  className={`
+                  absolute inset-0 bg-gradient-to-br ${feature.color} 
+                  opacity-50 rounded-2xl blur-lg scale-105 transition-all
+                  group-hover:opacity-80
+                `}></div>
+                <div
+                  className={`
+                  relative bg-white border border-gray-100 rounded-2xl p-3 text-center 
+                  shadow transition-all duration-300 ${feature.effect}
+                `}>
+                  <div className="mb-4 flex justify-center">{feature.icon}</div>
+                  <h3 className="text-xl font-semibold mb-3 text-gray-900">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-gray-50 text-center">
+        <h2 className="text-3xl font-bold mb-12">Flexible Pricing Plans</h2>
+        <PriceCards />
+      </section>
     </motion.div>
   );
 }
