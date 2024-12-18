@@ -8,8 +8,8 @@ function Home() {
     <motion.div
       animate={{ y: 0, opacity: 1 }}
       initial={{ y: 300, opacity: 0 }}
-      className="min-h-screen relative overflow-hidden bg-gray-50">
-      <header className="relative pt-24 pb-24 overflow-hidden">
+      className="flex-grow min-h-screen relative overflow-hidden">
+      <header className="relative pt-24 pb-24 overflow-hidden bg-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-2 items-center gap-16">
             <div className="space-y-6 text-left">
@@ -96,7 +96,7 @@ function Home() {
         </div>
       </header>
 
-      <section className="py-24 bg-gray-50">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-6">
@@ -156,7 +156,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="py-24 bg-gray-50 text-center">
+      <section className="py-24 text-center">
         <h2 className="text-3xl font-bold mb-12">Flexible Pricing Plans</h2>
         <PriceCards />
       </section>
