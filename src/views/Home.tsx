@@ -71,6 +71,18 @@ function Home() {
                       3
                     </p>
                     <div className="flex-grow">
+                      <p className="font-bold">Paste Job Company</p>
+                      <p className="text-sm text-gray-600">
+                        The company you're applying for
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-accentBlue/10 to-white rounded-lg p-3 flex items-center">
+                    <p className="text-4xl font-bold text-accentBlue/60 pr-3">
+                      4
+                    </p>
+                    <div className="flex-grow">
                       <p className="font-bold">Paste Job Description</p>
                       <p className="text-sm text-gray-600">
                         The full job description you're applying for
@@ -80,7 +92,7 @@ function Home() {
 
                   <div className="bg-gradient-to-r from-accentBlue/10 to-white rounded-lg p-3 flex items-center">
                     <p className="text-4xl font-bold text-accentBlue/60 pr-3">
-                      4
+                      5
                     </p>
                     <div className="flex-grow">
                       <p className="font-bold">Get Results</p>
