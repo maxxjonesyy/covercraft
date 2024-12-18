@@ -59,7 +59,10 @@ function Token() {
   }, []);
 
   return (
-    <motion.div animate={{ y: 0, opacity: 1 }} initial={{ y: 300, opacity: 0 }}>
+    <motion.div
+      animate={{ y: 0, opacity: 1 }}
+      initial={{ y: 300, opacity: 0 }}
+      className="flex-grow">
       <div className="container pb-[6rem] flex flex-col items-center">
         <img src={StripeBadge} alt="Stripe" className="h-8 w-auto mb-10" />
         <h1 className="text-3xl mb-2">Add Tokens</h1>
