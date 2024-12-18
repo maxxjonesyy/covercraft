@@ -13,7 +13,7 @@ import {
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-white to-indigo-100/80">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white via-white to-indigo-100/80">
       <Navbar />
 
       <Routes>
