@@ -4,33 +4,36 @@ import { Github } from "lucide-react";
 function Footer() {
   return (
     <footer className="text-sm md:text-base py-6 text-center bg-transparent">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-center items-center space-x-6">
-          {/* Need to create this when the site is live  */}
+      <div className="max-w-[75rem] mx-auto px-5">
+        <div className="flex flex-col items-center gap-2">
+          <div className="flex items-center space-x-4 text-gray-600">
+            <a
+              href="https://tcxfl25krmr.typeform.com/to/EcPulg8v"
+              target="_blank"
+              className="hover:text-accentBlue transition-colors">
+              Contact
+            </a>
 
-          {/* <Link
-            to="/privacy"
-            className="hover:text-[#3943B7] transition-colors">
-            Privacy Policy
-          </Link>
-          <div className="text-gray-400">|</div> */}
-          <a
-            href="https://tcxfl25krmr.typeform.com/to/EcPulg8v"
-            target="_blank"
-            className="hover:text-accentBlue transition-colors">
-            Contact
-          </a>
-          <div className="text-gray-400">|</div>
+            <div className="text-gray-400">|</div>
+            <Link
+              to="/privacy"
+              className="hover:text-accentBlue transition-colors">
+              Privacy Policy
+            </Link>
+          </div>
 
-          <a
-            href="https://github.com/maxxjonesyy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 hover:text-accentBlue transition-colors"
-            aria-label="GitHub Repository">
-            <Github size={18} />
-            <p>maxxjonesyy</p>
-          </a>
+          <div className="inline-flex items-center gap-2 mt-2 text-xs text-gray-600">
+            <p>© {new Date().getFullYear()} Covercraft</p>
+            <div className="text-gray-400">-</div>
+            <a
+              href="https://github.com/maxxjonesyy"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex gap-0.5 hover:text-accentBlue transition-colors">
+              <Github className="w-4 h-4" />
+              Built by maxxjonesyy
+            </a>
+          </div>
         </div>
       </div>
     </footer>
