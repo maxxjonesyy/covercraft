@@ -48,6 +48,8 @@ async function createCoverLetter(req, res) {
 
     if (completion.choices[0]) {
       user.totalCoverLetters++;
+      user.tokenCount--;
+
       await user.save();
       res.status(200).json({
         data: completion.choices[0].message.content,

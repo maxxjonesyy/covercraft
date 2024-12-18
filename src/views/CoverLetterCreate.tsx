@@ -45,6 +45,7 @@ function CoverLetterCreate() {
           return {
             ...prev,
             totalCoverLetters,
+            tokenCount: prev.tokenCount - 1,
           };
         });
 
