@@ -4,15 +4,16 @@ import { motion } from "framer-motion";
 import { ResizableTextArea, Button } from "../components/index";
 import { useMutation } from "@tanstack/react-query";
 import { UserContext } from "../context/UserContext";
+import { useAxiosInstance } from "../hooks/index";
+import { downloadAsDOC, copyToClipboard } from "../utils/index";
+import {
+  backArrowSVG,
+  clickToCopySVG,
+  saveSVG,
+  downloadSVG,
+  editSVG,
+} from "../assets/index";
 import toast from "react-hot-toast";
-import backArrowSVG from "../assets/icons/back-arrow.svg";
-import clickToCopySVG from "../assets/icons/click-to-copy.svg";
-import saveSVG from "../assets/icons/save.svg";
-import downloadSVG from "../assets/icons/download.svg";
-import editSVG from "../assets/icons/edit.svg";
-import useAxiosInstance from "../hooks/useAxiosInstance";
-import downloadAsDOC from "../utils/downloadAsDOC";
-import copyToClipboard from "../utils/copyToClipboard";
 
 function CoverLetterReady() {
   const { user } = useContext(UserContext);

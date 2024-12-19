@@ -5,9 +5,8 @@ import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Loader } from "../components/index";
+import { useAxiosInstance, useLoginForm } from "../hooks/index";
 import toast from "react-hot-toast";
-import useLoginForm from "../hooks/useLoginForm";
-import useAxiosInstance from "../hooks/useAxiosInstance";
 
 interface LoginFormData {
   email: string;
@@ -60,7 +59,7 @@ function Login() {
 
       <button
         type="submit"
-        className="flex items-center justify-center gap-5 my-3 max-w-xl w-full max-w-lg bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
+        className="flex items-center justify-center gap-5 my-3 max-w-xl w-full bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
         {handleLogin.isPending && <Loader />}
         Login
       </button>

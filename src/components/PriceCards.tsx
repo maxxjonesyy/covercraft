@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { CheckCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import useAxiosInstance from "../hooks/useAxiosInstance";
+import { useAxiosInstance } from "../hooks/index";
 import toast from "react-hot-toast";
 
 function PriceCards() {

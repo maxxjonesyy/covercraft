@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ResizableTextArea, Loader } from "../components/index";
 import { UserContext } from "../context/UserContext";
+import { createSVG } from "../assets/index";
+import { extractFileText } from "../utils/index";
+import { useAxiosInstance, useCoverLetterForm } from "../hooks/index";
 import toast from "react-hot-toast";
-import extractFileText from "../utils/extractFileText";
-import useCoverLetterForm from "../hooks/useCoverLetterForm";
-import createSVG from "../assets/icons/create.svg";
-import useAxiosInstance from "../hooks/useAxiosInstance";
 
 interface CoverLetterFormData {
   title: string;

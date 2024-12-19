@@ -4,10 +4,8 @@ import { motion } from "framer-motion";
 import { useMutation } from "@tanstack/react-query";
 import { ReactQueryError } from "../types/types";
 import { useNavigate } from "react-router-dom";
-import { Loader } from "../components/index";
-import TickSVG from "../components/TickSVG";
-import useRegisterForm from "../hooks/useRegisterForm";
-import useAxiosInstance from "../hooks/useAxiosInstance";
+import { Loader, TickSVG } from "../components/index";
+import { useRegisterForm, useAxiosInstance } from "../hooks/index";
 import toast from "react-hot-toast";
 
 interface RegisterFormData {

@@ -1,7 +1,7 @@
 import { createContext, SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../types/types";
-import useAxiosInstance from "../hooks/useAxiosInstance";
+import { useAxiosInstance } from "../hooks/index";
 
 interface UserContextProps {
   user: User | null;

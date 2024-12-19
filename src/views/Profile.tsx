@@ -5,13 +5,14 @@ import { User } from "../types/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "../components";
 import { Loader } from "../components";
-import profileSVG from "../assets/icons/profile.svg";
-import saveSVG from "../assets/icons/save.svg";
-import useAxiosInstance from "../hooks/useAxiosInstance";
+import { profileSVG, saveSVG } from "../assets/index";
+import { useAxiosInstance } from "../hooks/index";
+import {
+  copyToClipboard,
+  createReadableDate,
+  downloadAsDOC,
+} from "../utils/index";
 import toast from "react-hot-toast";
-import createReadableDate from "../utils/createReadableDate";
-import downloadAsDOC from "../utils/downloadAsDOC";
-import copyToClipboard from "../utils/copyToClipboard";
 
 function Profile() {
   const axiosInstance = useAxiosInstance();
