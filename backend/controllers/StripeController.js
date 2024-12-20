@@ -14,7 +14,11 @@ const stripe = Stripe(
 async function createCheckoutSession(req, res) {
   const { priceId } = req.body;
   const token = req.headers["authorization"]?.split(" ")[1];
-  const domain = "http://localhost:5173/";
+
+  const domain =
+    env === "production"
+      ? "https://covercraft-mj.netlify.app/"
+      : "http://localhost:5173/";
 
   let decodedEmail;
 

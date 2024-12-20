@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useAxiosInstance } from "../hooks/index";
 import toast from "react-hot-toast";
 
+const env = import.meta.env.VITE_ENVIRONMENT;
+
 function PriceCards() {
   const axiosInstance = useAxiosInstance();
   const navigate = useNavigate();
@@ -19,7 +21,10 @@ function PriceCards() {
       features: ["5 Tokens", "$1 per Token"],
       highlight: false,
       gradient: "from-gray-100 to-gray-200",
-      priceId: "price_1QLfUtF40ixAgrNfyuMWGKUh",
+      priceId:
+        env === "production"
+          ? "price_1QXzDeF40ixAgrNfftRIseVZ"
+          : "price_1QLfUtF40ixAgrNfyuMWGKUh",
     },
     {
       price: "$10",
@@ -28,7 +33,10 @@ function PriceCards() {
       features: ["15 Tokens", "Bonus 5 Tokens", "Save 33% per Token"],
       highlight: true,
       gradient: "from-[#3943B7]/10 to-purple-200/20",
-      priceId: "price_1QLfe2F40ixAgrNfx1zpyWKP",
+      priceId:
+        env === "production"
+          ? "price_1QXzDmF40ixAgrNfPGSS96i9"
+          : "price_1QLfe2F40ixAgrNfx1zpyWKP",
     },
     {
       price: "$15",
@@ -37,7 +45,10 @@ function PriceCards() {
       features: ["25 Tokens", "Bonus 10 Tokens", "Save 40% per Token"],
       highlight: false,
       gradient: "from-blue-100/10 to-[#3943B7]/10",
-      priceId: "price_1QLffZF40ixAgrNfYC0QcWZf",
+      priceId:
+        env === "production"
+          ? "price_1QXzDpF40ixAgrNfgIJNVdO1"
+          : "price_1QLffZF40ixAgrNfYC0QcWZf",
     },
   ];
 
