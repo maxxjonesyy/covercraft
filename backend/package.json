@@ -2,10 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "covercraft backend",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "test": ""
+    "start": "node server.js"
   },
   "author": "Maxwell Jones",
   "license": "ISC",
