@@ -21,20 +21,29 @@ const corsOptions = {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
+      console.error("CORS Error: Origin not allowed", origin); // Debugging
       callback(new Error("Not allowed by CORS"));
     }
   },
   credentials: true,
-  optionsSuccessStatus: 200,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  allowedHeaders: "Content-Type,Authorization",
+  optionsSuccessStatus: 204, // Some browsers expect 204 for preflight
 };
 
+// Apply CORS globally
 app.use(cors(corsOptions));
 
+// Explicitly handle preflight requests
+app.options("*", cors(corsOptions));
+
+// Middleware configuration
 app.use("/webhook", bodyParser.raw({ type: "application/json" }));
 app.use(express.json({ limit: "1mb" }));
 app.use(cookieParser());
 app.use(escapeInputs);
 
+// Routes
 app.use("/", require("./routes/openai-routes"));
 app.use("/", require("./routes/token-routes"));
 app.use("/", require("./routes/user-routes"));
@@ -42,6 +51,13 @@ app.use("/", require("./routes/coverletter-routes"));
 app.use("/", require("./routes/stripe-routes"));
 app.use("/", sseRouter);
 
+// Debugging middleware for error handling
+app.use((err, req, res, next) => {
+  console.error("Server Error:", err.message);
+  res.status(500).send("Internal Server Error");
+});
+
+// Connect to MongoDB and start server
 connectMongoDB()
   .then(() => {
     app.listen(PORT, () => {
