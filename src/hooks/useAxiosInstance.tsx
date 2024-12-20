@@ -10,8 +10,6 @@ function useAxiosInstance() {
     baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
   });
 
-  axiosInstance.defaults.withCredentials = true;
-
   axiosInstance.interceptors.request.use(
     (request) => {
       const tokenAndCredentials = [
