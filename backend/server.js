@@ -13,8 +13,7 @@ const app = express();
 const allowedOrigins = [
   process.env.LOCAL_ENV1,
   process.env.LOCAL_ENV2,
-
-  //   Production URL will go here
+  process.env.PRODUCTION_ENV,
 ];
 
 const corsOptions = {
