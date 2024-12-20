@@ -11,9 +11,9 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 
 const allowedOrigins = [
-  process.env.LOCAL_ENV1,
-  process.env.LOCAL_ENV2,
-  process.env.PRODUCTION_ENV,
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://covercraft-mj.netlify.app",
 ];
 
 const corsOptions = {
