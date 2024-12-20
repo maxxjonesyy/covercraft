@@ -18,7 +18,7 @@ function App() {
 
       <Suspense
         fallback={
-          <div className="flex items-center justify-center p-5">
+          <div className="flex items-center justify-center pt-[6rem] p-5">
             <Loader size={32} colour="#00000" />
           </div>
         }>
