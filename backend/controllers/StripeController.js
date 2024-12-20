@@ -63,8 +63,6 @@ async function createCheckoutSession(req, res) {
   }
 }
 
-let isAlreadyProcessing;
-let event;
 async function paymentWebhook(req, res) {
   const endpointSecret =
     env === "production"
@@ -73,15 +71,15 @@ async function paymentWebhook(req, res) {
 
   try {
     const signature = req.headers["stripe-signature"];
-    event = stripe.webhooks.constructEvent(req.body, signature, endpointSecret);
+    const event = stripe.webhooks.constructEvent(
+      req.body,
+      signature,
+      endpointSecret
+    );
 
-    if (!isAlreadyProcessing) {
-      broadcastMessage({
-        message: "Processing payment...",
-      });
-
-      isAlreadyProcessing = true;
-    }
+    broadcastMessage({
+      message: "Processing payment...",
+    });
 
     if (event.type === "checkout.session.completed") {
       const charge = event.data.object;
