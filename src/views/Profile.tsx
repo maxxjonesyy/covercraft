@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, useContext, useEffect } from "react";
+import { ChangeEvent, useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { motion } from "framer-motion";
 import { User } from "../types/types";
