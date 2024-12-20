@@ -109,16 +109,6 @@ function Register() {
       </Link>
 
       <ul className="mt-10">
-        <li className="flex gap-2">
-          <TickSVG />
-          <div>
-            <p className="font-bold">Try before you buy</p>
-            <p className="text-sm">
-              Get a free cover letter before you have to pay any money
-            </p>
-          </div>
-        </li>
-
         <li className="flex gap-2 mt-5">
           <TickSVG />
           <div>
