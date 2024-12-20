@@ -19,14 +19,6 @@ function Profile() {
   const [isProfileOpen, setIsProfileOpen] = useState(true);
   const { user, setUser } = useContext(UserContext);
 
-  useEffect(() => {
-    const profileBtn = document.getElementById("profile-btn");
-    const coverLettersBtn = document.getElementById("cover-letters-btn");
-
-    profileBtn?.classList.toggle("tab--active");
-    coverLettersBtn?.classList.toggle("tab--active");
-  }, [isProfileOpen]);
-
   return (
     <motion.div
       animate={{ y: 0, opacity: 1 }}
@@ -44,7 +36,9 @@ function Profile() {
         <button
           onClick={() => setIsProfileOpen(true)}
           id="profile-btn"
-          className="flex items-center gap-1 p-2 tab--active">
+          className={`flex items-center gap-1 p-2 ${
+            isProfileOpen ? "tab--active" : ""
+          }`}>
           <img src={profileSVG} />
           Profile
         </button>
@@ -52,7 +46,9 @@ function Profile() {
         <button
           onClick={() => setIsProfileOpen(false)}
           id="cover-letters-btn"
-          className="flex items-center gap-1 p-2">
+          className={`flex items-center gap-1 p-2 ${
+            !isProfileOpen ? "tab--active" : ""
+          }`}>
           <img src={saveSVG} />
           Cover Letters
         </button>
