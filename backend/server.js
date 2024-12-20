@@ -45,10 +45,10 @@ app.use("/", sseRouter);
 
 connectMongoDB()
   .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+    console.log(`Server running on port ${PORT}`);
   })
   .catch((error) => {
     console.log("Failed to connect to MongoDB:", error);
   });
+
+module.exports = app;
