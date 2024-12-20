@@ -3,7 +3,13 @@ const jwt = require("jsonwebtoken");
 const { addTokensToUser, getTokens } = require("../controllers/UserController");
 const { broadcastMessage } = require("../routes/sse-route");
 
-const stripe = Stripe(process.env.STRIPE_TEST_KEY);
+const env = process.env.ENVIRONMENT;
+
+const stripe = Stripe(
+  env === "production"
+    ? process.env.STRIPE_LIVE_KEY
+    : process.env.STRIPE_TEST_KEY
+);
 
 async function createCheckoutSession(req, res) {
   const { priceId } = req.body;
@@ -56,7 +62,10 @@ async function createCheckoutSession(req, res) {
 let isAlreadyProcessing;
 let event;
 async function paymentWebhook(req, res) {
-  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  const endpointSecret =
+    env === "production"
+      ? process.env.STRIPE_LIVE_WEBHOOK_SECRET
+      : process.env.STRIPE_TEST_WEBHOOK_SECRET;
 
   try {
     const signature = req.headers["stripe-signature"];
