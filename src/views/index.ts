@@ -5,6 +5,7 @@ import CoverLetterCreate from "./CoverLetterCreate";
 import CoverLetterReady from "./CoverLetterReady";
 import Profile from "./Profile";
 import Token from "./Token";
+import Privacy from "./Privacy";
 
 export {
   Home,
@@ -14,4 +15,5 @@ export {
   CoverLetterReady,
   Profile,
   Token,
+  Privacy,
 };

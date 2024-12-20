@@ -10,6 +10,7 @@ const CoverLetterCreate = lazy(() => import("./views/CoverLetterCreate"));
 const CoverLetterReady = lazy(() => import("./views/CoverLetterReady"));
 const Profile = lazy(() => import("./views/Profile"));
 const Token = lazy(() => import("./views/Token"));
+const Privacy = lazy(() => import("./views/Privacy"));
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/coverletter/result" element={<CoverLetterReady />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/token" element={<Token />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Routes>
       </Suspense>
 
