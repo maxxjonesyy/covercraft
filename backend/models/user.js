@@ -7,6 +7,12 @@ const coverLetterSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+const orderSchema = new mongoose.Schema({
+  sessionId: { type: String, required: true },
+  tokensBought: { type: Number, required: true },
+  createdAt: { type: Date, default: Date.now },
+});
+
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
@@ -14,6 +20,7 @@ const userSchema = new mongoose.Schema({
   tokenCount: { type: Number, default: 0 },
   totalCoverLetters: { type: Number, default: 0 },
   savedCoverLetters: [coverLetterSchema],
+  orders: [orderSchema],
   createdAt: { type: Date, default: Date.now },
 });
 

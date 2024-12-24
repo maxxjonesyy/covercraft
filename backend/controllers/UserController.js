@@ -183,7 +183,7 @@ async function addTokensToUser(email, tokensToAdd) {
       return false;
     }
 
-    user.tokenCount = Number(user.tokenCount) + Number(tokensToAdd);
+    user.tokenCount = Number(user.tokenCount) + tokensToAdd;
     await user.save();
 
     return true;
