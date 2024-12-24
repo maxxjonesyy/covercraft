@@ -1,63 +1,8 @@
 import { motion } from "framer-motion";
 import { PriceCards } from "../components";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
-import { useEffect } from "react";
 import { stripeBadge } from "../assets/index";
-import toast from "react-hot-toast";
 
 function Token() {
-  const { setUser } = useContext(UserContext);
-
-  useEffect(() => {
-    const eventSource = new EventSource(
-      `${import.meta.env.VITE_BACKEND_BASE_URL}/events`
-    );
-
-    let isProcessing = false;
-
-    eventSource.onmessage = (event) => {
-      const { message, updatedTokens } = JSON.parse(event.data);
-
-      if (message === "Processing payment..." && !isProcessing) {
-        toast.loading(message);
-        isProcessing = true;
-      } else if (message === "Payment complete!") {
-        if (updatedTokens > 0 && updatedTokens !== undefined) {
-          setUser((prevState) => {
-            if (!prevState) {
-              return null;
-            }
-
-            return {
-              ...prevState,
-              tokenCount: updatedTokens,
-            };
-          });
-        }
-        toast.dismiss();
-        toast.success(message);
-        eventSource.close();
-        isProcessing = false;
-      } else if (message === "Payment failed") {
-        toast.dismiss();
-        toast.error(message);
-        eventSource.close();
-      }
-    };
-
-    eventSource.onerror = (error) => {
-      console.error("EventSource failed:", error);
-      toast.error("An error occurred with the payment process.");
-      eventSource.close();
-    };
-
-    return () => {
-      toast.dismiss();
-      eventSource.close();
-    };
-  }, []);
-
   return (
     <motion.div
       animate={{ y: 0, opacity: 1 }}

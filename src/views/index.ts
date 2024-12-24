@@ -6,6 +6,7 @@ import CoverLetterReady from "./CoverLetterReady";
 import Profile from "./Profile";
 import Token from "./Token";
 import Privacy from "./Privacy";
+import PaymentRedirect from "./PaymentRedirect";
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   Profile,
   Token,
   Privacy,
+  PaymentRedirect,
 };
