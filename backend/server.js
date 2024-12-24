@@ -5,7 +5,6 @@ const cookieParser = require("cookie-parser");
 const connectMongoDB = require("./database/mongo");
 const { escapeInputs } = require("./middleware/middleware");
 const bodyParser = require("body-parser");
-const { router: sseRouter } = require("./routes/sse-route");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -41,7 +40,6 @@ app.use("/", require("./routes/token-routes"));
 app.use("/", require("./routes/user-routes"));
 app.use("/", require("./routes/coverletter-routes"));
 app.use("/", require("./routes/stripe-routes"));
-app.use("/", sseRouter);
 
 connectMongoDB()
   .then(() => {
