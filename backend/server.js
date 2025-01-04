@@ -12,11 +12,12 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  "https://covercraft-mj.netlify.app",
+  "https://covercraft-mj.netlify.app/",
 ];
 
 const corsOptions = {
   origin: function (origin, callback) {
+    console.log("Origin:", origin);
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
@@ -24,14 +25,6 @@ const corsOptions = {
     }
   },
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: [
-    "Origin",
-    "X-Requested-With",
-    "Content-Type",
-    "Accept",
-    "Authorization",
-  ],
   optionsSuccessStatus: 200,
 };
 
