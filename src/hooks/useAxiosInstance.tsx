@@ -21,6 +21,7 @@ function useAxiosInstance() {
       ];
       const credentials = [
         "/refresh-token",
+        "/coverLetter",
         "/login",
         "/profile",
         "/savedCoverLetters",
