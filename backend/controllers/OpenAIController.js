@@ -2,9 +2,6 @@ const OpenAI = require("openai");
 const openai = new OpenAI(process.env.OPENAI_API_KEY);
 const User = require("../models/user");
 
-export const maxDuration = 20;
-export const dynamic = "edge";
-
 async function createCoverLetter(req, res) {
   const { title, email, company, description, resume } = req.body;
   const maxWords = 300;
