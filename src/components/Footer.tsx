@@ -7,12 +7,11 @@ function Footer() {
       <div className="max-w-[75rem] mx-auto px-5">
         <div className="flex flex-col items-center gap-2">
           <div className="flex items-center space-x-4 text-gray-600">
-            <a
-              href="https://tcxfl25krmr.typeform.com/to/EcPulg8v"
-              target="_blank"
+            <Link
+              to="/contact/"
               className="hover:text-accentBlue transition-colors">
               Contact
-            </a>
+            </Link>
 
             <div className="text-gray-400">|</div>
             <Link
