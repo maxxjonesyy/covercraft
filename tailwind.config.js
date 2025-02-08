@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        wf: ["WFVisualSans", "sans-serif"],
+        custom: ["Mulish", "serif"],
         fontWeight: {
           regular: 400,
           medium: 500,
