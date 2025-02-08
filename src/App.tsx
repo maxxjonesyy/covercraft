@@ -12,6 +12,7 @@ const Profile = lazy(() => import("./views/Profile"));
 const Token = lazy(() => import("./views/Token"));
 const Privacy = lazy(() => import("./views/Privacy"));
 const PaymentRedirect = lazy(() => import("./views/PaymentRedirect"));
+const Contact = lazy(() => import("./views/Contact"));
 const NotFound = lazy(() => import("./views/NotFound"));
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/token" element={<Token />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/payment" element={<PaymentRedirect />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

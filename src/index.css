@@ -49,11 +49,17 @@
   }
 
   input {
-    @apply w-full max-w-xl p-1.5 bg-white/50 border border-gray-300 rounded;
+    @apply w-full max-w-xl;
   }
 
   textarea {
-    @apply w-full max-w-3xl p-1.5 bg-white/50 border border-gray-300 rounded scrollbar-hide overflow-hidden resize-none;
+    @apply w-full max-w-3xl scrollbar-hide overflow-hidden resize-none;
+  }
+
+  input,
+  textarea,
+  select {
+    @apply p-1.5 bg-white/50 border border-gray-300 rounded;
   }
 }
 
