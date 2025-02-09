@@ -23,7 +23,15 @@ function CustomTextArea(props: any) {
     }
   }, [props.editMode]);
 
-  return <textarea ref={textAreaRef} {...props} cols={50} rows={12} />;
+  return (
+    <textarea
+      ref={textAreaRef}
+      {...props}
+      cols={50}
+      rows={12}
+      className="overflow-scroll"
+    />
+  );
 }
 
 export default CustomTextArea;

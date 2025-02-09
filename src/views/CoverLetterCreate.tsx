@@ -14,8 +14,10 @@ interface CoverLetterFormData {
   company: string;
   description: string;
   resume: string;
+  grammar: string;
+  tone: string;
+  preferences?: string;
 }
-
 function CoverLetterCreate() {
   const navigate = useNavigate();
   const axiosInstance = useAxiosInstance();
@@ -124,10 +126,85 @@ function CoverLetterCreate() {
           onChange={handleChange}
         />
 
+        <section className="flex gap-8">
+          <div className="space-y-2">
+            <label
+              htmlFor="grammar"
+              className="block text-sm font-medium text-gray-700">
+              Grammar preference:
+            </label>
+            <div className="relative">
+              <select
+                onChange={handleChange}
+                value={formData.grammar}
+                name="grammar"
+                id="grammar"
+                className="w-36 appearance-none rounded-md border border-gray-300 bg-white px-3 py-2 pr-8 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                <option value="australian">Australian</option>
+                <option value="british">British</option>
+                <option value="american">American</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="h-4 w-4 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20">
+                  <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label
+              htmlFor="tone"
+              className="block text-sm font-medium text-gray-700">
+              Tone:
+            </label>
+            <div className="relative">
+              <select
+                onChange={handleChange}
+                value={formData.tone}
+                name="tone"
+                id="tone"
+                className="w-36 appearance-none rounded-md border border-gray-300 bg-white px-3 py-2 pr-8 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                <option value="professional">Professional</option>
+                <option value="casual">Casual</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="h-4 w-4 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20">
+                  <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className="space-y-2">
+          <label
+            htmlFor="preferences"
+            className="block text-sm font-medium text-gray-700">
+            Custom Preferences (Optional, 150 characters max)
+          </label>
+          <textarea
+            id="preferences"
+            name="preferences"
+            value={formData.preferences}
+            onChange={handleChange}
+            placeholder="Add any specific preferences for your cover letter (e.g., 'Keep it concise' or 'Focus on leadership experience')"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            rows={3}
+            maxLength={150}
+          />
+        </div>
+
         <button
           type="submit"
           disabled={handleCoverletter.isPending}
-          className="flex items-center justify-center gap-2 mt-3 bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
+          className="flex items-center justify-center gap-2 mt-5 bg-accentBlue text-white px-4 py-2 rounded shadow transition-all hover:scale-105">
           {!handleCoverletter.isPending ? (
             <img src={createSVG} alt="create cover letter" />
           ) : (
