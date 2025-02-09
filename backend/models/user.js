@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  tokenCount: { type: Number, default: 0 },
+  tokenCount: { type: Number, default: 1 },
   totalCoverLetters: { type: Number, default: 0 },
   savedCoverLetters: [coverLetterSchema],
   orders: [orderSchema],
