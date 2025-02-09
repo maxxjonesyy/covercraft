@@ -102,9 +102,8 @@ function DropDownMenu({ tokenCount }: { tokenCount: number | undefined }) {
             </Link>
 
             <Link
-              className="flex items-center gap-2 text-center border-b border-gray-200 p-2.5 transition-color duration-300 hover:bg-gray-100"
-              to="https://tcxfl25krmr.typeform.com/to/EcPulg8v"
-              target="_blank">
+              to="/contact"
+              className="flex items-center gap-2 text-center border-b border-gray-200 p-2.5 transition-color duration-300 hover:bg-gray-100">
               <img src={contactSVG} alt="contact us" />
               Contact
             </Link>
