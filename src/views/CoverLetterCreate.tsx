@@ -117,7 +117,7 @@ function CoverLetterCreate() {
           className="max-w-3xl"
         />
 
-        <label htmlFor="description">Job decription:</label>
+        <label htmlFor="description">Job description:</label>
         <ResizableTextArea
           id="description"
           name="description"
