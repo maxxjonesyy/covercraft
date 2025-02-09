@@ -17,7 +17,7 @@ const NotFound = lazy(() => import("./views/NotFound"));
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white via-white to-indigo-100/80">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white via-white to-indigo-100/50">
       <Navbar />
 
       <Suspense

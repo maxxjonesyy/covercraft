@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Edit, Zap, Rocket, Award } from "lucide-react";
 import { PriceCards } from "../components";
+import { stripeBadge } from "../assets/index";
 
 function Home() {
   return (
@@ -123,41 +124,36 @@ function Home() {
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
-                icon: <Rocket className="w-10 h-auto text-green-600" />,
+                icon: <Rocket className="w-10 h-auto text-accentBlue" />,
                 title: "Rapid Generation",
                 description: "Tailored cover letters, generated in seconds",
-                color: "from-green-100/20 to-[#3943B7]/10",
                 effect: "group-hover:scale-105 group-hover:-rotate-6",
               },
               {
                 icon: <Edit className="w-10 h-auto text-accentBlue" />,
                 title: "Customisation",
-                description: "Easily make changes using our editor",
-                color: "from-[#3943B7]/10 to-blue-200/20",
+                description: "Easily make changes with the editor",
                 effect: "group-hover:scale-105 group-hover:rotate-6",
               },
               {
-                icon: <Award className="w-10 h-auto text-purple-600" />,
+                icon: <Award className="w-10 h-auto text-accentBlue" />,
                 title: "Download and Save",
                 description: "Save for later, or download and apply!",
-                color: "from-purple-100/20 to-[#3943B7]/10",
                 effect: "group-hover:scale-105",
               },
             ].map((feature, index) => (
               <div key={index} className="group relative">
                 <div
                   className={`
-                  absolute inset-0 bg-gradient-to-br ${feature.color} 
-                  opacity-50 rounded-2xl blur-lg scale-105 transition-all
-                  group-hover:opacity-80
-                `}></div>
+                  absolute inset-0 opacity-50 rounded-2xl blur-lg transition-all group-hover:opacity-80`}
+                />
                 <div
                   className={`
                   relative bg-white border border-gray-100 rounded-2xl p-3 text-center 
                   shadow transition-all duration-300 ${feature.effect}
                 `}>
                   <div className="mb-4 flex justify-center">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold mb-3 text-gray-900">
+                  <h3 className="text-lg font-semibold mb-1 text-gray-900">
                     {feature.title}
                   </h3>
                   <p className="text-gray-600">{feature.description}</p>
@@ -169,7 +165,15 @@ function Home() {
       </section>
 
       <section className="py-24 text-center">
-        <h2 className="text-3xl font-bold mb-12">Flexible Pricing Plans</h2>
+        <h2 className="text-3xl font-bold mb-2">Flexible Pricing Plans</h2>
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          Safe and secure payments
+        </p>
+        <img
+          src={stripeBadge}
+          alt="Stripe"
+          className="mt-8 mb-10 w-36 mx-auto"
+        />
         <PriceCards />
       </section>
     </motion.div>
