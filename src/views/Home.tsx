@@ -14,8 +14,8 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-2 items-center gap-16">
             <div className="space-y-6 text-left">
-              <h1 className="bg-accentBlue/10 inline-block px-4 py-2 rounded-full text-[#3943B7] text-sm tracking-wide">
-                Cover Letter Generator
+              <h1 className="bg-accentBlue/10 inline-block px-4 py-2 rounded-full text-[#3943B7] border border-[#3943B7]/30 text-sm tracking-wide">
+                Sign up and get a free cover letter on us!
               </h1>
               <h1 className="text-4xl font-extrabold text-gray-900 leading-tight">
                 Craft{" "}

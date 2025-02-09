@@ -112,8 +112,10 @@ function Register() {
         <li className="flex gap-2 mt-5">
           <TickSVG />
           <div>
-            <p className="font-bold">No monthly subscription</p>
-            <p className="text-sm">Only pay for the cover letters you create</p>
+            <p className="font-bold">Free cover letter for new accounts</p>
+            <p className="text-sm">
+              When you sign up, get a free cover letter on us
+            </p>
           </div>
         </li>
 
@@ -124,6 +126,14 @@ function Register() {
             <p className="text-sm">
               No payment information required to create an account
             </p>
+          </div>
+        </li>
+
+        <li className="flex gap-2 mt-5">
+          <TickSVG />
+          <div>
+            <p className="font-bold">No monthly subscription</p>
+            <p className="text-sm">Only pay for the cover letters you create</p>
           </div>
         </li>
       </ul>
