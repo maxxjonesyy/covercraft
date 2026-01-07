@@ -22,4 +22,7 @@ Covercraft is an AI cover letter generator, upload your resume, fill in a few si
 * Stripe payments
 
 ## Screenshots
-<img src="https://github.com/user-attachments/assets/5b25ad27-45b6-4c5a-aaa4-151c60b9b834" width="550px">
+<img width="800px" alt="Screenshot 2026-01-07 at 2 09 50 pm" src="https://github.com/user-attachments/assets/9cbfac5a-5c47-4076-ab1e-22ef600ee278" />
+<img width="800px" alt="Screenshot 2026-01-07 at 2 09 43 pm" src="https://github.com/user-attachments/assets/17e4df42-7b00-4ec6-9131-8ee89ee45c1e" />
+
+
