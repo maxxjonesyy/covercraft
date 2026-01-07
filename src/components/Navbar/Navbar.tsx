@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { ButtonLink } from "../index";
-import { Zap } from "lucide-react";
 
 import {
   contactSVG,
@@ -20,8 +19,7 @@ function Navbar() {
     <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm w-full">
       <div className="flex items-center justify-between mx-auto py-5 max-w-[75rem]">
         <Link to="/" className="flex items-center gap-1 px-4">
-          <Zap className="w-6 h-6 md:w-8 md:h-8 text-accentBlue" />
-          <span className="text-xl md:text-2xl font-bold text-gray-800">
+          <span className="text-xl md:text-2xl font-black text-gray-800">
             Covercraft
           </span>
         </Link>

@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Edit, Zap, Rocket, Award } from "lucide-react";
-import { PriceCards } from "../components";
+import { Zap } from "lucide-react";
+import { PriceCards, FeatureRow, Faq } from "../components";
 import { stripeBadge } from "../assets/index";
+import { savedCoverLetters, grammar, customInput } from "../assets/index";
 
 function Home() {
   return (
@@ -14,24 +15,30 @@ function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-2 items-center gap-16">
             <div className="space-y-6 text-left">
-              <h1 className="bg-accentBlue/10 inline-block px-4 py-2 rounded-full text-[#3943B7] border border-[#3943B7]/30 text-sm tracking-wide">
-                Sign up and get a free cover letter on us!
+              <h1 className="bg-accentBlue/10 inline-block px-4 py-2 rounded-full text-[#3943B7] border border-[#3943B7]/30 text-xs tracking-wide">
+                Sign up, get a free one on us! <br />
               </h1>
-              <h1 className="text-4xl font-extrabold text-gray-900 leading-tight">
-                Craft{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3943B7] to-purple-600">
-                  Tailored Cover Letters
+              <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+                <span className="relative inline-block px-4 py-1">
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#3943B7] via-purple-500 to-purple-600 transform skew-y-4 scale-105 rounded-2xl blur-sm opacity-50 -z-10"></span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-[#3943B7] to-purple-600 transform -skew-x-6 rounded-lg -z-10"></span>
+                  <span className="relative text-white font-bold">
+                    Tailored Cover Letters.
+                  </span>
                 </span>{" "}
-                in Seconds
+                <br />
+                In Seconds
               </h1>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Leverage us, to create tailored cover letters that perfectly
-                match your job description and experience.
+                Stop spending hours on every application. Get personalised,
+                professional cover letters instantly.
               </p>
 
               <div className="w-xl">
                 <Link to="/coverletter">
-                  <button className="flex items-center bg-gradient-to-r from-[#3943B7] to-purple-600 text-white px-8 py-3 rounded-lg shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 group">
+                  <button className="flex items-center  text-white px-6 py-2 rounded-lg shadow-xl hover:shadow-2xl transition transform hover:-translate-y-1 group">
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#3943B7] via-purple-500 to-purple-600 transform skew-y-4 scale-105 rounded-2xl blur-sm opacity-50 -z-10"></span>
+                    <span className="absolute inset-0 bg-gradient-to-r from-[#3943B7] to-purple-600 transform -skew-x-6 rounded-lg -z-10"></span>
                     <Zap className="mr-2 group-hover:animate-pulse" />
                     Create Cover Letter
                   </button>
@@ -40,7 +47,6 @@ function Home() {
             </div>
 
             <div className="relative pt-16 mt-15 md:mt-0 md:block">
-              <h2 className="text-3xl font-bold">How does it work?</h2>
               <div className="bg-white/80 rounded-2xl shadow-2xl p-6 mt-3 transform -rotate-3 hover:rotate-0 transition-transform">
                 <div className="space-y-3">
                   <div className="bg-gradient-to-r from-accentBlue/10 to-white rounded-lg p-3 flex items-center">
@@ -109,57 +115,38 @@ function Home() {
         </div>
       </header>
 
-      <section className="py-24">
+      <section className="py-28 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-6">
-              Streamline Your Application Process
+          <div className="text-center mb-20">
+            <h2 className="text-4xl font-bold mb-4">
+              Built to make cover letters effortless
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Generate, customise, and download impressive cover letters in
-              minutes
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Powerful features designed to save time, stay consistent, and
+              tailor every application.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-12">
-            {[
-              {
-                icon: <Rocket className="w-10 h-auto text-accentBlue" />,
-                title: "Rapid Generation",
-                description: "Tailored cover letters, generated in seconds",
-                effect: "group-hover:scale-105 group-hover:-rotate-6",
-              },
-              {
-                icon: <Edit className="w-10 h-auto text-accentBlue" />,
-                title: "Customisation",
-                description: "Easily make changes with the editor",
-                effect: "group-hover:scale-105 group-hover:rotate-6",
-              },
-              {
-                icon: <Award className="w-10 h-auto text-accentBlue" />,
-                title: "Download and Save",
-                description: "Save for later, or download and apply!",
-                effect: "group-hover:scale-105",
-              },
-            ].map((feature, index) => (
-              <div key={index} className="group relative">
-                <div
-                  className={`
-                  absolute inset-0 opacity-50 rounded-2xl blur-lg transition-all group-hover:opacity-80`}
-                />
-                <div
-                  className={`
-                  relative bg-white border border-gray-100 rounded-2xl p-3 text-center 
-                  shadow transition-all duration-300 ${feature.effect}
-                `}>
-                  <div className="mb-4 flex justify-center">{feature.icon}</div>
-                  <h3 className="text-lg font-semibold mb-1 text-gray-900">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </div>
-              </div>
-            ))}
+          <div className="space-y-24">
+            <FeatureRow
+              reverse
+              title="Save, download and edit cover letters."
+              description="Store generated cover letters and easily revisit or refine them for future applications, no starting from scratch."
+              image={savedCoverLetters}
+            />
+
+            <FeatureRow
+              title="Edit grammar and tone style."
+              description="Get full control and pick a tone that fits the role. Professional, casual, confident, or concise."
+              image={grammar}
+            />
+
+            <FeatureRow
+              reverse
+              title="Highlight what matters."
+              description="Use our custom input to emphasise specific skills, experience, or achievements you want recruiters to notice."
+              image={customInput}
+            />
           </div>
         </div>
       </section>
@@ -175,6 +162,10 @@ function Home() {
           className="mt-8 mb-10 w-36 mx-auto"
         />
         <PriceCards />
+      </section>
+
+      <section className="py-24 text-center">
+        <Faq />
       </section>
     </motion.div>
   );

@@ -38,8 +38,8 @@ function useCoverLetterForm() {
         errorMessage: "Title must be at least 5 characters",
       },
       {
-        isValid: company.length >= 5,
-        errorMessage: "Company name must be at least 5 characters",
+        isValid: company.length >= 3,
+        errorMessage: "Company name must be at least 3 characters",
       },
       {
         isValid: description.length >= 100,

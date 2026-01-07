@@ -83,7 +83,6 @@ interface updatedInfoProps {
 }
 
 function ProfileTab({ user, setUser, axiosInstance }: ProfileTabProps) {
-  const [showNewPassword, setShowNewPassword] = useState(false);
   const [updatedInfo, setUpdatedInfo] = useState<updatedInfoProps>({
     currentEmail: user?.email as string,
   });
@@ -229,7 +228,6 @@ function ProfileTab({ user, setUser, axiosInstance }: ProfileTabProps) {
       <div className="flex justify-between border border-secondary rounded">
         <input
           onChange={handleChange}
-          onFocus={() => setShowNewPassword(true)}
           type="password"
           name="currentPassword"
           placeholder="*************"
@@ -250,18 +248,16 @@ function ProfileTab({ user, setUser, axiosInstance }: ProfileTabProps) {
           )}
       </div>
 
-      {showNewPassword && (
-        <>
-          <label htmlFor="newPassword">New Password:</label>
-          <input
-            onChange={handleChange}
-            type="password"
-            name="newPassword"
-            placeholder="*************"
-            className="max-w-full"
-          />
-        </>
-      )}
+      <>
+        <label htmlFor="newPassword">New Password:</label>
+        <input
+          onChange={handleChange}
+          type="password"
+          name="newPassword"
+          placeholder="*************"
+          className="max-w-full"
+        />
+      </>
     </motion.div>
   );
 }
