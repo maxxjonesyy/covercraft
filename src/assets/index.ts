@@ -13,6 +13,9 @@ import tokenSVG from "./icons/token.svg";
 
 // Images
 import stripeBadge from "./images/Powered by Stripe - black.svg";
+import savedCoverLetters from "./images/cover-letters.webp";
+import grammar from "./images/grammar.webp";
+import customInput from "./images/custom-input.webp";
 
 export {
   backArrowSVG,
@@ -27,4 +30,7 @@ export {
   saveSVG,
   tokenSVG,
   stripeBadge,
+  savedCoverLetters,
+  grammar,
+  customInput,
 };

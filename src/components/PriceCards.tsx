@@ -70,7 +70,7 @@ function PriceCards() {
   });
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-4 max-w-7xl mx-auto sm:px-6 lg:px-8 text-center">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-12 md:px-6 text-center">
       {planData.map((plan, index) => (
         <div
           key={index}
